@@ -1,6 +1,0 @@
-# @package _global_
-hydra:
-  launcher:
-    _target_: hydra._internal.core_plugins.basic_launcher.NotALauncher
-
-experiment: launcher_config

@@ -1,4 +1,0 @@
-recursive-include hydra_app *.py
-recursive-include hydra_app *.yaml
-global-exclude *.pyc
-global-exclude __pycache__

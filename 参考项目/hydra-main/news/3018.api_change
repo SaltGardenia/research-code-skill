@@ -1,1 +1,0 @@
-Deprecate hydra.job.override_dirname in favor of hydra_override_dirname.

@@ -1,3 +1,0 @@
-# Prefer CPU PyTorch wheels in plugin test environments.
---extra-index-url https://download.pytorch.org/whl/cpu
-torch>=2.2

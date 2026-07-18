@@ -1,3 +1,0 @@
-hydra:
-  job:
-    name: name_from_config_file

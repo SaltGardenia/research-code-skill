@@ -1,3 +1,0 @@
-defaults:
-  - optional group1:
-      - not_found

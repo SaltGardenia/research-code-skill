@@ -1,3 +1,0 @@
-defaults:
-  - hydra/help: custom1
-  - group1: file1

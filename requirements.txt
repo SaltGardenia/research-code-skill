@@ -1,3 +1,10 @@
-# Script dependencies for research-code-reviewer
+# Script dependencies for research-code-skill
 # Used by scripts/audit_style.py
 PyYAML>=6.0
+
+# Mandatory code-quality tools (the standard gate the skill enforces)
+black>=24.4
+isort>=5.13
+ruff>=0.4
+mypy>=1.9
+pytest>=8.0

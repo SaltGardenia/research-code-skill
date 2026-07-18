@@ -1,7 +1,0 @@
-# @package _global_
-hydra:
-  sweeper:
-    params:
-      x: 1,2
-
-experiment: sweeper_params

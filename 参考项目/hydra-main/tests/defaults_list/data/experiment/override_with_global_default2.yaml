@@ -1,2 +1,0 @@
-defaults:
-  - override /group1@_global_: file2

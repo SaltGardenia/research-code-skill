@@ -1,3 +1,0 @@
-defaults:
-  - override: file1
-  - override override: file2

@@ -1,5 +1,0 @@
-defaults:
-  - base_postgresql
-
-user: postgres_user
-password: drowssap

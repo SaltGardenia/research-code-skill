@@ -1,4 +1,0 @@
-defaults:
-  - group1: file1
-  - group2: file2
-  - group1_group2: ${group1}_${group2}

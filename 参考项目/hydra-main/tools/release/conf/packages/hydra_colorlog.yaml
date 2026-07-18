@@ -1,3 +1,0 @@
-hydra_colorlog:
-  path: plugins/${.name}
-  version_file: hydra_plugins/${.name}/__init__.py

@@ -1,3 +1,0 @@
-defaults:
-  - group1: file1
-  - ${not_found}

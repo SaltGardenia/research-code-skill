@@ -1,4 +1,0 @@
-defaults:
-  - group1: file1
-  - hydra/run: custom1
-  - override hydra/output: disabled

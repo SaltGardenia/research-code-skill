@@ -1,3 +1,0 @@
-defaults:
-  - "optional  group1": file1
-  - "override\tgroup2": file2

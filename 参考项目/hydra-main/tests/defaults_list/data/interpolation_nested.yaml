@@ -1,3 +1,0 @@
-defaults:
-  - group1/group2: file1
-  - group1_group2: foo_${group1/group2}

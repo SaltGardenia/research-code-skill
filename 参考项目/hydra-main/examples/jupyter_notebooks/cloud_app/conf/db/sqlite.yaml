@@ -1,6 +1,0 @@
-# @package _global_
-db:
-  driver: sqlite
-  user: ???
-  pass: ???
-  file: test.db

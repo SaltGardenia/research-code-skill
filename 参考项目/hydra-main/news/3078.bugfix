@@ -1,1 +1,0 @@
-Fix on_job_end and on_run_end callbacks not being called when a job is stopped with a KeyboardInterrupt.

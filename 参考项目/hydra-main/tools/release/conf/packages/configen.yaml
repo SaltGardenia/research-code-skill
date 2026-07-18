@@ -1,3 +1,0 @@
-configen:
-  path: tools/${.name}
-  version_type: SETUP
