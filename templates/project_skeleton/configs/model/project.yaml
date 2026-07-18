@@ -1,0 +1,3 @@
+_target_: src.models.components.<Project>Model
+lr: 1.0e-3
+optimizer: adam

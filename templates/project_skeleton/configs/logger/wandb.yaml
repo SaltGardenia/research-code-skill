@@ -1,0 +1,3 @@
+_target_: lightning.pytorch.loggers.WandbLogger
+project: <project>
+log_model: true

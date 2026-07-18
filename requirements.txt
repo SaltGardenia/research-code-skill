@@ -1,0 +1,3 @@
+# Script dependencies for research-code-reviewer
+# Used by scripts/audit_style.py
+PyYAML>=6.0

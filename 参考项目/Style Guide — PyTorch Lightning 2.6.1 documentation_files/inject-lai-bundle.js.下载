@@ -1,0 +1,33 @@
+// Loaded by the marketing/docs pages (gridai/lightning-wordpress) to embed
+// the Lightning header/footer. Discovers the hashed entry-bundle URL via
+// Vite's native build manifest at `/manifest.json`, then injects it as an
+// ES-module script.
+//
+// Both `/shared/inject-lai-bundle.js` (this file) and `/manifest.json` are
+// served with `Cache-Control: no-cache` (see `docker/nginx.conf`), so any
+// change to either propagates within one page load instead of a CDN/browser
+// TTL.
+(function () {
+  var host = window.origin;
+
+  fetch(host + "/manifest.json")
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (manifest) {
+      // Vite manifest is keyed by source path; the SPA entry is `index.html`.
+      // Its `file` field is the hashed entry-chunk URL (e.g.
+      // `static/entry-<hash>.js`).
+      var entry = manifest["index.html"];
+      if (!entry || !entry.file) {
+        return;
+      }
+      var script = document.createElement("script");
+      script.src = host + "/" + entry.file;
+      // Vite-built entry is an ES module — `<script type="module">` is
+      // required for the top-level `import` statements to execute, and
+      // module scripts are deferred by default (no `defer` needed).
+      script.type = "module";
+      document.head.appendChild(script);
+    });
+})();

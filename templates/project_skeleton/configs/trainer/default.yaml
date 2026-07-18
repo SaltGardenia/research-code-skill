@@ -1,0 +1,5 @@
+_target_: lightning.Trainer
+accelerator: auto
+devices: 1
+max_epochs: 10
+precision: 32

@@ -1,0 +1,14 @@
+defaults:
+  - _self_
+  - trainer: default
+  - model: null
+  - data: null
+  - logger: null
+  - callbacks: null
+  - paths: default
+  - extras: default
+
+seed: 1234
+train: true
+test: true
+ckpt_path: null
