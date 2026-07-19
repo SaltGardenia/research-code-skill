@@ -103,6 +103,45 @@ rule), `MINOR` (should-fix).
 - COMMENT016: every paper-core module has a Purpose/Formula/Reference/IO/Complexity/Design doc block. [MAJOR]
 - COMMENT017: on modify, update/remove stale comments and docstring new public APIs. [MAJOR]
 
+## RC-KARPATHY — LLM coding-discipline principles (`references/coordination.md`)
+Derived from Andrej Karpathy's observations on LLM coding pitfalls. These are
+**behavioral** guardrails that sit above the mechanical RC-* cards: they govern
+how the agent reasons and edits, not which specific symbol/format to use. They
+directly counter four failure modes: wrong assumptions, overcomplication,
+orthogonal edits, and vague/unverifiable goals.
+
+- RC-KARPATHY-001: **Think Before Coding** — state assumptions explicitly; if
+  ambiguous, present multiple interpretations and ask rather than silently
+  guessing. [MAJOR]
+- RC-KARPATHY-002: **Think Before Coding** — push back when a simpler approach
+  exists; surface tradeoffs instead of blindly following the literal request. [MINOR]
+- RC-KARPATHY-003: **Think Before Coding** — stop and name what is unclear; do
+  not hide confusion or run with a wrong assumption. [MAJOR]
+- RC-KARPATHY-004: **Simplicity First** — write the minimum code that solves
+  the problem; no features, abstractions, configurability, or error handling
+  beyond what was requested. [MAJOR]
+- RC-KARPATHY-005: **Simplicity First** — if the same work fits in far fewer
+  lines (e.g. 200 → 50), rewrite it; a senior engineer should not call it
+  overcomplicated. [MINOR]
+- RC-KARPATHY-006: **Surgical Changes** — touch only what the request requires;
+  do not "improve" adjacent code, comments, or formatting. [MAJOR]
+- RC-KARPATHY-007: **Surgical Changes** — match existing style even if you would
+  do it differently; do not refactor unbroken code. [MINOR]
+- RC-KARPATHY-008: **Surgical Changes** — remove only imports/vars/funcs that
+  *your* change made unused; if you spot pre-existing dead code, mention it,
+  never delete it unasked. [MINOR]
+- RC-KARPATHY-009: **Goal-Driven Execution** — transform imperative asks into
+  verifiable goals (e.g. "write a test that reproduces the bug, then make it
+  pass"); loop until the success criterion is met. [MAJOR]
+- RC-KARPATHY-010: **Goal-Driven Execution** — for multi-step work, state a
+  brief plan with a verify step per item before acting. [MINOR]
+
+> Note: these four principles (Think Before Coding, Simplicity First, Surgical
+> Changes, Goal-Driven Execution) bias toward **caution over speed**. Use
+> judgment on trivial one-liners (typo fixes) — not every change needs full
+> rigor. They augment, never replace, the `LHT-/HY-/PL-/GP-*` and other RC-*
+> cards.
+
 ## How the agent uses Rule Cards
 
 1. Choose the **cluster** for the concern at hand, then load only that one

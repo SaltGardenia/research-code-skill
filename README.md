@@ -1,26 +1,26 @@
-# Research Code Skill
+# 🧪 科研代码 Skill
 
 [![Skill](https://img.shields.io/badge/skill-research--code-blue)](https://github.com/SaltGardenia/research-code-skill)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://www.python.org)
 
 > 让科研（ML/DL）代码库保持整洁、一致。Agent 在**编写和修改代码的过程中**就应用这套标准，而非事后审查。
-> [中文文档 →](./README.zh.md)
+> [English →](./README.en.md)
 
-## 能力列表
+## ✨ 能力列表
 
-- 项目层面，建立一套清晰、可预期的结构并长期保持。
-- 代码层面，注释讲清思路、API 设计合理、模块化完善。
-- 实验参数一律走配置文件，代码只从配置读取，杜绝硬编码。
-- 模型与系统分离，模型自包含，遵循固定方法顺序。
-- 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
-- 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
-- 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
-- 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
-- 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
-- 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
+- 🏗️ 项目层面：建立清晰、可预期的结构，并长期保持。
+- 💬 代码层面：高质量注释，简洁有力、高度概括、短句优先、拆分长句；API 设计合理；模块化完善。
+- ⚙️ 实验参数一律走配置，代码只从配置读取，杜绝硬编码。
+- 🧩 模型与系统分离，模型自包含，遵循固定方法顺序。
+- 🔁 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
+- 🚦 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
+- 🔧 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
+- 📦 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
+- 🤝 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
+- 📏 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
 
-## 两个场景示例
+## 🎯 两个场景示例
 
 **A. 从零搭建**
 > “在这里新建一个科研项目，并添加一个在 CIFAR 上训练的模型。”
@@ -30,7 +30,7 @@
 > “整理这个仓库：把代码归入正确目录，把训练参数改成配置，并保持命名统一。”
 > Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。
 
-## 项目结构示例
+## 📂 项目结构示例
 
 Agent 搭建或整理后产出的标准结构（与 Lightning-Hydra-Template 完全一致）：
 
@@ -65,7 +65,7 @@ Agent 搭建或整理后产出的标准结构（与 Lightning-Hydra-Template 完
 └── README.md
 ```
 
-## 参考项目
+## 📚 参考项目
 
 | 关注领域 | 依据 |
 |------|------|
@@ -74,7 +74,7 @@ Agent 搭建或整理后产出的标准结构（与 Lightning-Hydra-Template 完
 | 可复现实验 | [Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch) |
 | 工程习惯与接口 | [Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范 |
 
-## 快速开始
+## 🚀 快速开始
 
 克隆到稳定路径（不要在此副本内开发），让 Agent 指向 `SKILL.md`：
 

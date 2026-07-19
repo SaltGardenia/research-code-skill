@@ -200,6 +200,8 @@ only the reference for the operation at hand.
 > - EXPERIMENT REPRO → `references/experiment_repro.md` (`RC-HYDRA-*`, `RC-DATA-*`, `RC-VER-*`, `RC-META-*`)
 > - ENGINEERING PROCESS → `references/engineering_process.md` (`RC-ENG-*`, `RC-SP-*`, `COMMENT-*`)
 > - cross-cutting → `references/coordination.md` + `references/rule_cards.md`
+> - BEHAVIORAL DISCIPLINE → `references/rule_cards.md` (`RC-KARPATHY-*`): think
+>   before coding, keep it simple, make surgical edits, drive by verifiable goals.
 
 ### Step 1 — Project structure & Python grammar (Cluster 1)
 Load `references/scaffold_grammar.md` (fuses Lightning-Hydra-Template layout,
@@ -359,6 +361,14 @@ rather than mere links. They live inside the four cluster files. Load
     (intent, math, design decision, experiment constraint), not a line-by-line
     narration; public APIs/docstrings follow NumPy/PEP257; math carries the
     formula + citation; `TODO(owner): reason`; no stale comments (`COMMENT-001..017`).
+  - **LLM Coding-Discipline (Karpathy) `RC-KARPATHY-*`**: a behavioral layer
+    over the mechanical cards — **Think Before Coding** (surface assumptions,
+    tradeoffs, confusion), **Simplicity First** (minimum code, no speculative
+    abstraction), **Surgical Changes** (touch only what is asked, match style,
+    clean only your own orphans), **Goal-Driven Execution** (imperative →
+    verifiable goal + verify loop). It counters LLM failure modes — wrong
+    assumptions, overcomplication, orthogonal edits, vague goals — and biases
+    toward caution over speed (use judgment on trivial one-liners).
 
 When a Rule Card touches code already covered by `LHT-/HY-/PL-/GP-*`, apply the
 single most specific code and cross-link; never duplicate a rule under two
