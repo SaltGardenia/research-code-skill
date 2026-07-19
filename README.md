@@ -32,7 +32,7 @@
 
 ## 📂 项目结构示例
 
-Agent 搭建或整理后产出的标准结构（与 Lightning-Hydra-Template 完全一致）：
+Agent 搭建或整理后产出的标准结构：
 
 ```
 <project>/

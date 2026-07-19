@@ -32,7 +32,7 @@
 
 ## 📂 Project structure example
 
-Standard structure produced after the agent scaffolds or tidies (identical to Lightning-Hydra-Template):
+Standard structure produced after the agent scaffolds or tidies:
 
 ```
 <project>/

@@ -8,7 +8,9 @@ description: >-
   and configuration — so every file is uniform. It codifies five authoritative
    systems as machine-executable Rule Cards (RC-*). It fuses thirteen
    authoritative references into four usage clusters so the agent never stacks
-   them as separate checklists: (1) Project Scaffold & Python Grammar
+   them as separate checklists, plus a Karpathy-inspired behavioral discipline
+   (Think Before Coding, Simplicity First, Surgical Changes, Goal-Driven
+   Execution) layered above the mechanical cards: (1) Project Scaffold & Python Grammar
    (Lightning-Hydra-Template structure + Hydra configs + Google Python
    Style); (2) Model & Component Design (PyTorch Lightning Style Guide + timm
    named architectures + OpenMMLab Registry pattern); (3) Experiment
@@ -200,6 +202,7 @@ only the reference for the operation at hand.
 > - EXPERIMENT REPRO → `references/experiment_repro.md` (`RC-HYDRA-*`, `RC-DATA-*`, `RC-VER-*`, `RC-META-*`)
 > - ENGINEERING PROCESS → `references/engineering_process.md` (`RC-ENG-*`, `RC-SP-*`, `COMMENT-*`)
 > - cross-cutting → `references/coordination.md` + `references/rule_cards.md`
+> - BEHAVIORAL DISCIPLINE → `references/rule_cards.md` (`RC-KARPATHY-*`)
 > - BEHAVIORAL DISCIPLINE → `references/rule_cards.md` (`RC-KARPATHY-*`): think
 >   before coding, keep it simple, make surgical edits, drive by verifiable goals.
 
