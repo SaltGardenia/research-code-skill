@@ -34,6 +34,61 @@
 > "Tidy this repo: move code into the right dirs, turn training params into config, unify naming."
 > The agent audits drift, then refactors/rename into compliance and re-runs the gates.
 
+## 📂 Scaffolded project layout
+
+When building from scratch (Scenario A), the skill generates the target repo using the directory tree below — the Lightning-Hydra-Template structure. Replace `<project>` with your project name; `data/` and `logs/` are git-ignored.
+
+```text
+<project>/
+├── .github/workflows/ci.yaml
+├── .env.example
+├── .gitignore
+├── .pre-commit-config.yaml
+├── .project-root
+├── configs/
+│   ├── train.yaml
+│   ├── eval.yaml
+│   ├── callbacks/default.yaml
+│   ├── data/<project>.yaml
+│   ├── debug/default.yaml
+│   ├── experiment/example.yaml
+│   ├── extras/default.yaml
+│   ├── hparams_search/mnist_optuna.yaml
+│   ├── hydra/default.yaml
+│   ├── local/default.yaml
+│   ├── logger/wandb.yaml
+│   ├── model/<project>.yaml
+│   ├── paths/default.yaml
+│   └── trainer/default.yaml
+├── data/            # git-ignored
+├── logs/            # git-ignored
+├── notebooks/1.0-jqp-explore.ipynb
+├── scripts/
+│   ├── train.sh
+│   └── test.sh
+├── src/
+│   ├── __init__.py
+│   ├── train.py
+│   ├── eval.py
+│   ├── data/
+│   │   ├── __init__.py
+│   │   └── components/__init__.py
+│   ├── models/
+│   │   ├── __init__.py
+│   │   └── components/__init__.py
+│   └── utils/
+│       ├── __init__.py
+│       └── utils.py
+├── tests/test_configs.py
+├── environment.yaml
+├── Makefile
+├── MANIFEST.md
+├── README.md
+├── pyproject.toml
+├── requirements.txt
+└── setup.py
+```
+
 ## 📚 Reference projects
 
 | Concern                         | Basis                                                                                                                                                                                                                                   |
