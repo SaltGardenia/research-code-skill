@@ -9,20 +9,19 @@
 
 ## ✨ 能力列表
 
-- 建立清晰、可预期的项目结构，并长期保持。
+- 项目层面，建立一套清晰、可预期的结构并长期保持。
 - 模型与系统分离，模型自包含，遵循固定方法顺序。
-- 实验参数一律走配置，代码只读 `cfg`，不写死字面量。
+- 实验参数一律走配置文件，代码只从配置读取，杜绝硬编码。
 - 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
-- 强制质量门（black / isort / ruff / mypy / pytest），变更通过后才接受。
-- 高质量注释：简洁有力，讲 why 不讲 what，公式带引用、决策带 Reason。
-- Python 风格统一：命名规范、import 分组、docstring 齐全、类型注解到位。
-- 命名架构加可插拔：timm 分层、OpenMMLab 注册即用，拒绝 `if model == "..."`。
+- 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
+- 代码层面，注释讲清思路、API 设计合理、模块化完善。
+- 命名架构加可插拔：timm 分层、OpenMMLab 注册即用，拒绝 `if model == "..."` 分支。
 - 以可安装包交付，CI 跑风格与类型检查，小步评审、接口文档不漂移。
 - 行为纪律：先想后写、保持简单、外科手术式改动、目标驱动执行。
-- 自动维护 `.gitignore`，随结构变化同步规则，不破坏手写项。
-- 运行产物收口到 `.cache/`，仓库根不散落缓存。
-- 不删不改你的代码，只移动、重命名以保持行为不变。
-- 规范即规则、可检查，随工作实时应用，而非仅引用文档。
+- 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
+- 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
+- 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
+- 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
 
 ## 🎯 两个场景示例
 
@@ -42,6 +41,7 @@
 | 模型与组件设计 | [PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html)、[timm](https://github.com/huggingface/pytorch-image-models)、[OpenMMLab](https://github.com/open-mmlab) |
 | 可复现实验 | [Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch) |
 | 工程习惯与接口 | [Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范 |
+| LLM 编码纪律 | [Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)：编码前先思考、简洁优先、精准改动、目标驱动执行 |
 
 ## 🚀 快速开始
 
