@@ -35,7 +35,7 @@
 > “整理这个仓库：代码归位，训练参数改配置，命名统一。”
 > Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。
 
-## 📂 生成的项目结构
+## 📂 生成的项目结构（[Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)）
 
 ```text
 <project>/

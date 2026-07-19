@@ -34,7 +34,7 @@
 > "Tidy this repo: move code into the right dirs, turn training params into config, unify naming."
 > The agent audits drift, then refactors/rename into compliance and re-runs the gates.
 
-## 📂 Scaffolded project layout
+## 📂 Scaffolded project layout（[Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)）
 
 ```text
 <project>/

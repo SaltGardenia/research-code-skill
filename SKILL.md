@@ -270,12 +270,28 @@ Use `scripts/audit_style.py` as a conformance gate (it checks a subset of these
 codes). The full rule registry lives in `references/coordination.md`.
 
 ### Step 5 鈥?Build from zero (Scenario A)
-Used when the target is empty or absent. Load
-`references/scaffold_grammar.md`, then generate the directory skeleton
-from `templates/project_skeleton/` per its `MANIFEST.md`. Copy `configs/` +
-`src/` stubs and root files. Do not overwrite existing user files; report
-exactly what was created and what was skipped. Then continue with Steps 1鈥? as
-you write each new file, so the project conforms from the first commit.
+Used when the target is empty or absent. The directory structure is **frozen and
+non-negotiable** 鈥? copy it **verbatim**, no free-form invention.
+
+1. Load `references/scaffold_grammar.md` (section 1: the authoritative directory
+   tree) and `templates/project_skeleton/MANIFEST.md` (the exact file list).
+2. **Copy the entire `templates/project_skeleton/` tree into the target repo as-is.**
+   This is a literal copy 鈥? do **not** add, rename, merge, or drop any directory
+   or file listed in `MANIFEST.md`, and do **not** substitute your own layout.
+   Files ship with the literal name `project` (e.g. `configs/data/project.yaml`,
+   `configs/model/project.yaml`); copy them verbatim so the generated tree matches
+   `MANIFEST.md` exactly and passes `scripts/audit_style.py` (LHT-STRICT). Renaming
+   `project` to the real project name is an optional later step and must keep the
+   same paths.
+3. Do not overwrite existing user files; report exactly what was created and what
+   was skipped.
+4. Then continue with Steps 1鈥? as you write each new file, so the project conforms
+   from the first commit.
+
+> **No improvisation rule:** the structure above is the single source of truth.
+> Never "improve", simplify, or expand the layout. If a need seems to require a
+> new directory, place the code under the existing role split (`src/data`,
+> `src/models`, `src/utils`) instead of inventing one.
 6. **Sync `.gitignore`**: run `python scripts/sync_gitignore.py .` so the ignore
    list reflects the freshly created layout (the script only maintains its
    auto-managed block and never touches hand-written rules).

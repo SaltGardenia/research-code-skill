@@ -270,6 +270,72 @@ def check_repo(root: str, max_len: int, out: List[Finding]) -> None:
     for fp in py_files:
         check_python_file(fp, max_len, out)
 
+    # LHT-STRICT: the generated tree must match MANIFEST.md verbatim.
+    _check_manifest_conformance(root, out)
+
+
+def _parse_manifest_entries(manifest_path: str) -> List[str]:
+    """Return the canonical file/dir list from a MANIFEST.md.
+
+    Lines look like `- configs/train.yaml` or `- data/  (git-ignored)`.
+    We keep only bullet lines and strip trailing `(...)` annotations and
+    whitespace, so the result is a clean relative path list.
+    """
+    entries: List[str] = []
+    try:
+        with open(manifest_path, "r", encoding="utf-8") as fh:
+            for line in fh:
+                s = line.strip()
+                if not s.startswith("- "):
+                    continue
+                path = s[2:].strip()
+                # drop trailing "(...)" annotation if present
+                if "  (" in path:
+                    path = path.split("  (", 1)[0].strip()
+                if path:
+                    entries.append(path)
+    except (OSError, UnicodeDecodeError):
+        return []
+    return entries
+
+
+def _check_manifest_conformance(root: str, out: List[Finding]) -> None:
+    """Ensure the repo layout matches the frozen MANIFEST exactly.
+
+    The MANIFEST lives next to this script (templates/project_skeleton/
+    MANIFEST.md). Any file/dir listed there that is missing in `root` is a
+    BLOCKER: the structure is frozen and non-negotiable. The only allowed
+    substitution is the `<project>` placeholder, replaced by the repo's
+    directory name.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    manifest_path = os.path.join(
+        here, "..", "templates", "project_skeleton", "MANIFEST.md"
+    )
+    if not os.path.exists(manifest_path):
+        return
+    entries = _parse_manifest_entries(manifest_path)
+    if not entries:
+        return
+    # The template ships files with the literal name `project`
+    # (e.g. configs/data/project.yaml). `<project>` in the MANIFEST is the
+    # human-readable placeholder; the on-disk name after a verbatim copy is
+    # `project`, which is what we verify against.
+    for entry in entries:
+        rel = entry.replace("<project>", "project")
+        target = os.path.join(root, rel)
+        is_dir = rel.endswith("/")
+        if is_dir:
+            ok = os.path.isdir(target)
+        else:
+            ok = os.path.exists(target)
+        if not ok:
+            out.append(Finding(
+                "STRUCTURE", "BLOCKER", os.path.join(root, rel), "LHT-STRICT",
+                f"Frozen layout violation: missing required {rel} "
+                f"(must match MANIFEST.md exactly).",
+            ))
+
 
 # ---- report --------------------------------------------------------------
 
