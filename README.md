@@ -9,20 +9,20 @@
 
 ## ✨ 能力列表
 
-- 🏗️ 项目层面：结构清晰、可预期，长期保持。
-- 💬 高质量注释：简洁有力，短句优先。讲 why，不讲 what。公式带引用，决策带 Reason，TODO/FIXME/WARNING 规范，论文核心模块单列 doc block。
-- 🎨 Python 风格与命名：snake_case / CapWords / UPPER_CASE。import 分组，docstring 齐全，类型注解到位，行宽统一。
-- ⚙️ 实验参数全走配置。代码只读 `cfg`，不写死字面量。
-- 🧩 模型与系统分离。模型自包含，方法顺序固定。LightningModule 用 torchmetrics，`/` 命名指标，显式 `configure_optimizers`，DDP 友好。
-- 🏛️ 命名架构加可插拔。timm 风（layers/blocks/architectures）；OpenMMLab 注册即用；拒绝 `if model == "..."` 分支。
-- 🔁 实验可复现。配置、数据版本（FAIR）、代码 tag（SemVer/Git Flow）三者绑定。结果可重生。禁止 `train_v2_final.py`。
-- 🚦 强制质量门：black / isort / ruff / mypy / pytest。变更通过后才接受。
-- 📦 以可安装包交付。CI 跑风格与类型检查。小步评审，接口文档不漂移。
-- 🧠 行为纪律（Karpathy）：先想后写，保持简单，外科手术式改动，目标驱动执行。
-- 🔧 自动维护 `.gitignore`。随结构变化同步规则，不破坏手写项。
-- 📂 产物收口到 `.cache/`。仓库根不散落缓存。
-- 🤝 不删不改你的代码。只移动、重命名，保持行为不变。
-- 📏 规范即规则，可检查。随工作实时应用，而非仅引用文档。
+- 建立清晰、可预期的项目结构，并长期保持。
+- 模型与系统分离，模型自包含，遵循固定方法顺序。
+- 实验参数一律走配置，代码只读 `cfg`，不写死字面量。
+- 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
+- 强制质量门（black / isort / ruff / mypy / pytest），变更通过后才接受。
+- 高质量注释：简洁有力，讲 why 不讲 what，公式带引用、决策带 Reason。
+- Python 风格统一：命名规范、import 分组、docstring 齐全、类型注解到位。
+- 命名架构加可插拔：timm 分层、OpenMMLab 注册即用，拒绝 `if model == "..."`。
+- 以可安装包交付，CI 跑风格与类型检查，小步评审、接口文档不漂移。
+- 行为纪律：先想后写、保持简单、外科手术式改动、目标驱动执行。
+- 自动维护 `.gitignore`，随结构变化同步规则，不破坏手写项。
+- 运行产物收口到 `.cache/`，仓库根不散落缓存。
+- 不删不改你的代码，只移动、重命名以保持行为不变。
+- 规范即规则、可检查，随工作实时应用，而非仅引用文档。
 
 ## 🎯 两个场景示例
 
@@ -33,41 +33,6 @@
 **B. 整理已有仓库**
 > “整理这个仓库：代码归位，训练参数改配置，命名统一。”
 > Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。
-
-## 📂 项目结构示例
-
-Agent 搭建或整理后产出的标准结构：
-
-```
-<project>/
-├── .github/workflows/         # CI（pytest + pre-commit）
-├── configs/                   # Hydra 配置，按关注点分组
-│   ├── callbacks/  data/  debug/  experiment/
-│   ├── extras/  hparams_search/  hydra/
-│   ├── local/  logger/  model/  paths/  trainer/
-│   ├── eval.yaml  train.yaml     # 主配置（defaults 列表）
-├── data/                      # 原始 / 处理后的数据（git 忽略）
-├── logs/                      # hydra + logger 输出，带时间戳（git 忽略）
-├── notebooks/                 # 编号 + 缩写 + 简述（如 1.0-jqp-explore.ipynb）
-├── scripts/                   # shell 脚本（Makefile 目标调用）
-├── src/
-│   ├── data/                  # LightningDataModule
-│   ├── models/                # 模型骨干 + LightningModule
-│   │   └── components/        # 可复用的模型组件
-│   ├── utils/                 # 工具与实例化逻辑
-│   ├── eval.py  train.py      # @hydra.main 入口
-├── tests/                     # 冒烟 + 单元测试（pytest）
-├── .env.example               # 私有环境变量模板（复制为 .env）
-├── .gitignore
-├── .pre-commit-config.yaml    # 格式化 / lint / 安全 hooks
-├── .project-root              # rootutils 标记项目根
-├── environment.yaml           # conda 环境
-├── Makefile                   # make train/test/format/clean
-├── pyproject.toml             # pytest + coverage + 工具配置
-├── requirements.txt
-├── setup.py                   # 以包形式安装项目
-└── README.md
-```
 
 ## 📚 参考项目
 

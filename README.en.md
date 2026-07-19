@@ -9,20 +9,20 @@
 
 ## ✨ Capabilities
 
-- 🏗️ Project level: a clear, predictable structure — kept that way.
-- 💬 High-quality comments: concise, forceful, short-sentence first. Explain why, not what. Formulas carry citations; decisions carry a `Reason:`; `TODO`/`FIXME`/`WARNING` disciplined; paper-core modules get a dedicated doc block.
-- 🎨 Python style & naming: snake_case / CapWords / UPPER_CASE. Grouped imports, full docstrings, type hints, unified line length.
-- ⚙️ Every experiment parameter lives in config. Code reads `cfg` only — no hardcoded literals.
-- 🧩 Models decoupled from systems. Self-contained, fixed method order. LightningModule uses torchmetrics, `/`-named metrics, explicit `configure_optimizers`, DDP-friendly.
-- 🏛️ Named architectures & pluggability: timm style (layers/blocks/architectures); OpenMMLab Registry registers-then-builds; no `if model == "..."` branching.
-- 🔁 Reproducible experiments: config, data version (FAIR), and code tag (SemVer/Git Flow) bound together. Results regenerate. No `train_v2_final.py`.
-- 🚦 Mandatory quality gates: black / isort / ruff / mypy / pytest. A change must pass before it is accepted.
-- 📦 Ships as an installable package. CI runs style + type checks. Small reviewable changes; interface docs never drift.
-- 🧠 Behavioral discipline (Karpathy): think before coding, simplicity first, surgical changes, goal-driven execution.
-- 🔧 Automaintained `.gitignore`: rules sync with the layout, hand-written entries preserved.
-- 📂 Run artifacts funnel into `.cache/`; no cache files litter the repo root.
-- 🤝 Never deletes or rewrites your code. Only moves or renames — behavior preserved.
-- 📏 Rules are machine-checkable. Applied live as work proceeds, not just cited from docs.
+- Establish a clear, predictable project structure — and keep it that way.
+- Decouple models from systems; models are self-contained and follow a fixed method order.
+- Every experiment parameter lives in config; code reads `cfg` only, no hardcoded literals.
+- Reproducible experiments: config, data version, and code tag bound together so results regenerate.
+- Mandatory quality gates (black / isort / ruff / mypy / pytest) must pass before a change is accepted.
+- High-quality comments: concise, explain why not what; formulas carry citations, decisions carry a `Reason:`.
+- Uniform Python style: naming, grouped imports, full docstrings, type hints.
+- Named architectures & pluggability: timm tiers, OpenMMLab register-then-build, no `if model == "..."`.
+- Ships as an installable package; CI runs style + type checks; small reviewable changes, interface docs never drift.
+- Behavioral discipline: think before coding, simplicity first, surgical changes, goal-driven execution.
+- Automaintained `.gitignore`: rules sync with the layout, hand-written entries preserved.
+- Run artifacts funnel into `.cache/`; no cache files litter the repo root.
+- Never deletes or rewrites your code — only moves or renames to preserve behavior.
+- Rules are machine-checkable; applied live as work proceeds, not just cited from docs.
 
 ## 🎯 Two scenario examples
 
@@ -33,41 +33,6 @@
 **B. Tidy an existing repo**
 > "Tidy this repo: move code into the right dirs, turn training params into config, unify naming."
 > The agent audits drift, then refactors/rename into compliance and re-runs the gates.
-
-## 📂 Project structure example
-
-Standard structure produced after the agent scaffolds or tidies:
-
-```
-<project>/
-├── .github/workflows/         # CI (pytest + pre-commit)
-├── configs/                   # Hydra configs grouped by concern
-│   ├── callbacks/  data/  debug/  experiment/
-│   ├── extras/  hparams_search/  hydra/
-│   ├── local/  logger/  model/  paths/  trainer/
-│   ├── eval.yaml  train.yaml     # main configs (defaults lists)
-├── data/                      # raw / processed data (git-ignored)
-├── logs/                      # hydra + logger outputs, timestamped (git-ignored)
-├── notebooks/                 # numbered + initials + short desc (e.g. 1.0-jqp-explore.ipynb)
-├── scripts/                   # shell scripts (called by Makefile targets)
-├── src/
-│   ├── data/                  # LightningDataModule
-│   ├── models/                # model backbone + LightningModule
-│   │   └── components/        # reusable model components
-│   ├── utils/                 # utilities and instantiation logic
-│   ├── eval.py  train.py      # @hydra.main entrypoints
-├── tests/                     # smoke + unit tests (pytest)
-├── .env.example               # template for private env vars (copy to .env)
-├── .gitignore
-├── .pre-commit-config.yaml    # formatting / lint / security hooks
-├── .project-root              # rootutils marks the project root
-├── environment.yaml           # conda env
-├── Makefile                   # make train/test/format/clean
-├── pyproject.toml             # pytest + coverage + tool config
-├── requirements.txt
-├── setup.py                   # install project as a package
-└── README.md
-```
 
 ## 📚 Reference projects
 
