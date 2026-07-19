@@ -5,23 +5,22 @@
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://www.python.org)
 
 > Keep research codebases tidy and consistent. The agent applies this standard **as it writes and edits** — not as an after-the-fact review.
-> [中文文档→](./README.md)
 
 ## ✨ Capabilities
 
-- 🏗️ Project level: establish a clear, predictable structure and keep it that way.
-- 🧩 Models are decoupled from systems, self-contained, following a fixed method order.
+- 🚦 Mandatory quality gates (black / isort / ruff / mypy / pytest) must pass before a change is accepted.
 - ⚙️ All experiment parameters live in config files; code only reads from config, no hardcoding.
 - 🔁 Reproducible experiments: config, data version, and code tag bound together, so results regenerate.
-- 🚦 Mandatory quality gates (black / isort / ruff / mypy / pytest) must pass before a change is accepted.
-- 💬 Code level: comments explain the thinking, sensible API design, clean modularization.
+- 🏗️ Project level: establish a clear, predictable structure and keep it that way.
+- 🧩 Models are decoupled from systems, self-contained, following a fixed method order.
 - 🏛️ Named architectures & pluggability: timm tiers, OpenMMLab register-then-build, no `if model == "..."` branching.
+- 💬 Code level: comments explain the thinking, sensible API design, clean modularization.
 - 📦 Ships as an installable package; CI runs style + type checks; small reviewable changes, interface docs never drift.
 - 🧠 Behavioral discipline: think before coding, simplicity first, surgical changes, goal-driven execution.
+- 📏 Every rule is encoded as a checkable rule, applied and verified live as work proceeds — not just referenced from docs.
+- 🤝 Key principle: the agent never deletes or rewrites your code on a whim — it only moves or renames to preserve behavior.
 - 🔧 Automaintained `.gitignore`: ignore rules sync with the layout, without clobbering hand-written rules.
 - 📂 Run artifacts funnel into `.cache/`; no cache files litter the repo root.
-- 🤝 Key principle: the agent never deletes or rewrites your code on a whim — it only moves or renames to preserve behavior.
-- 📏 Every rule is encoded as a checkable rule, applied and verified live as work proceeds — not just referenced from docs.
 
 ## 🎯 Two scenario examples
 

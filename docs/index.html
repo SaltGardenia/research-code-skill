@@ -136,26 +136,6 @@
   .btn.ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
   .btn:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
 
-  /* ledger */
-  .ledger{margin-top:64px;border:1px solid var(--rule-strong);background:var(--card);
-    box-shadow:var(--shadow);overflow:hidden}
-  .ledger .lh{display:flex;justify-content:space-between;align-items:center;
-    padding:12px 16px;border-bottom:1px solid var(--rule-strong);
-    background:var(--panel);font-family:"JetBrains Mono",monospace;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
-  .ledger .lh .dot{display:inline-block;width:9px;height:9px;border:1px solid var(--rule-strong);margin-right:6px;vertical-align:middle}
-  .row{display:grid;grid-template-columns:120px 1fr 96px;gap:14px;align-items:center;
-    padding:13px 16px;border-bottom:1px solid var(--rule);font-size:14px}
-  .row:last-child{border-bottom:0}
-  .row .code{font-family:"JetBrains Mono",monospace;font-weight:500;color:var(--signal)}
-  .row .desc{color:var(--lede)}
-  .sev{justify-self:end;font-family:"JetBrains Mono",monospace;font-size:10.5px;
-    letter-spacing:.08em;padding:3px 8px;border:1px solid currentColor;color:var(--muted)}
-  .sev.major{color:var(--ink)}
-  .sev.blocker{color:var(--blocker)}
-  .row.in{animation:rowIn .5s cubic-bezier(.2,.7,.2,1) both}
-  @keyframes rowIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){.row.in{animation:none}}
-
   /* systems */
   .grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--rule-strong);background:var(--card)}
   .cell{padding:22px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);position:relative}
@@ -240,7 +220,7 @@
 <!-- TOP BAR -->
 <header class="topbar">
   <div class="in">
-    <div class="mark">research&#8209;code&#8209;<b>skill</b><small data-en>conformance registry · v1.2.0</small><small data-zh>一致性规则登记表 · v1.2.0</small></div>
+    <div class="mark">research&#8209;code&#8209;<b>skill</b><small data-en>conformance registry · v1.3.0</small><small data-zh>一致性规则登记表 · v1.3.0</small></div>
     <button class="toggle" id="langBtn" type="button" aria-pressed="false" title="Switch language">
       <svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg>
       <span class="lbl" id="langLbl">ZH</span>
@@ -271,15 +251,6 @@
       <a class="btn primary" href="https://github.com/SaltGardenia/research-code-skill" data-zh hidden>获取 Skill →</a>
       <a class="btn ghost" href="#install" data-en>Read the install spec</a>
       <a class="btn ghost" href="#install" data-zh hidden>查看安装说明</a>
-    </div>
-
-    <div class="ledger" id="ledger" aria-label="What the skill guarantees">
-      <div class="lh"><span><span class="dot"></span><span data-en>WHAT IT GUARANTEES — a few examples</span><span data-zh hidden>它保证什么 —— 几个例子</span></span><span data-en>priority</span><span data-zh hidden>优先级</span></div>
-      <div class="row"><span class="code" data-en>Reproducible</span><span class="code" data-zh hidden>可复现</span><span class="desc" data-en>Every run records exactly which data it used</span><span class="desc" data-zh hidden>每次运行都记录它到底用了哪份数据</span><span class="sev blocker" data-en>MUST</span><span class="sev blocker" data-zh hidden>必须</span></div>
-      <div class="row"><span class="code" data-en>Consistent</span><span class="code" data-zh hidden>统一</span><span class="desc" data-en>Naming stays uniform across the whole project</span><span class="desc" data-zh hidden>命名在整个项目里保持统一</span><span class="sev major" data-en>STRONG</span><span class="sev major" data-zh hidden>强</span></div>
-      <div class="row"><span class="code" data-en>Predictable</span><span class="code" data-zh hidden>可预期</span><span class="desc" data-en>No hidden paths — locations resolve the same way every time</span><span class="desc" data-zh hidden>没有隐藏路径——位置每次都以同样方式解析</span><span class="sev major" data-en>STRONG</span><span class="sev major" data-zh hidden>强</span></div>
-      <div class="row"><span class="code" data-en>Self-describing</span><span class="code" data-zh hidden>自描述</span><span class="desc" data-en>Comments capture the reasoning, not just the steps</span><span class="desc" data-zh hidden>注释记录思路，而不只是步骤</span><span class="sev major" data-en>STRONG</span><span class="sev major" data-zh hidden>强</span></div>
-      <div class="row"><span class="code" data-en>Traceable</span><span class="code" data-zh hidden>可追溯</span><span class="desc" data-en>Each release maps back to a retrievable snapshot of the code</span><span class="desc" data-zh hidden>每次发布都能对应回一份可取回的代码快照</span><span class="sev major" data-en>STRONG</span><span class="sev major" data-zh hidden>强</span></div>
     </div>
   </section>
 
@@ -339,23 +310,23 @@
       <tbody>
         <tr>
           <td class="was" data-en data-h="Concern">Project structure &amp; style</td><td class="was" data-zh hidden data-h="关注领域">项目结构与写法</td>
-          <td class="now" data-en data-h="Basis"><a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a>, <a href="https://hydra.cc/">Hydra</a>, <a href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a></td><td class="now" data-zh hidden data-h="依据">[Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)、[Hydra](https://hydra.cc/)、[Google Python Style](https://google.github.io/styleguide/pyguide.html)</td>
+          <td class="now" data-en data-h="Basis"><a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a>, <a href="https://hydra.cc/">Hydra</a>, <a href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a></td><td class="now" data-zh hidden data-h="依据"><a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a>、<a href="https://hydra.cc/">Hydra</a>、<a href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a></td>
         </tr>
         <tr>
           <td class="was" data-en data-h="Concern">Model &amp; component design</td><td class="was" data-zh hidden data-h="关注领域">模型与组件设计</td>
-          <td class="now" data-en data-h="Basis"><a href="https://lightning.ai/docs/pytorch/stable/starter/style_guide.html">PyTorch Lightning Style</a>, <a href="https://github.com/huggingface/pytorch-image-models">timm</a>, <a href="https://github.com/open-mmlab">OpenMMLab</a></td><td class="now" data-zh hidden data-h="依据">[PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html)、[timm](https://github.com/huggingface/pytorch-image-models)、[OpenMMLab](https://github.com/open-mmlab)</td>
+          <td class="now" data-en data-h="Basis"><a href="https://lightning.ai/docs/pytorch/stable/starter/style_guide.html">PyTorch Lightning Style</a>, <a href="https://github.com/huggingface/pytorch-image-models">timm</a>, <a href="https://github.com/open-mmlab">OpenMMLab</a></td><td class="now" data-zh hidden data-h="依据"><a href="https://lightning.ai/docs/pytorch/stable/starter/style_guide.html">PyTorch Lightning Style</a>、<a href="https://github.com/huggingface/pytorch-image-models">timm</a>、<a href="https://github.com/open-mmlab">OpenMMLab</a></td>
         </tr>
         <tr>
           <td class="was" data-en data-h="Concern">Reproducible experiments</td><td class="was" data-zh hidden data-h="关注领域">可复现实验</td>
-          <td class="now" data-en data-h="Basis"><a href="https://hydra.cc/">Hydra</a>, <a href="https://www.go-fair.org/fair-principles/">FAIR</a>, <a href="https://semver.org/">SemVer</a>, <a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>, <a href="https://github.com/facebookresearch">Meta Research</a></td><td class="now" data-zh hidden data-h="依据">[Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch)</td>
+          <td class="now" data-en data-h="Basis"><a href="https://hydra.cc/">Hydra</a>, <a href="https://www.go-fair.org/fair-principles/">FAIR</a>, <a href="https://semver.org/">SemVer</a>, <a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>, <a href="https://github.com/facebookresearch">Meta Research</a></td><td class="now" data-zh hidden data-h="依据"><a href="https://hydra.cc/">Hydra</a>、<a href="https://www.go-fair.org/fair-principles/">FAIR</a>、<a href="https://semver.org/">SemVer</a>、<a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>、<a href="https://github.com/facebookresearch">Meta Research</a></td>
         </tr>
         <tr>
           <td class="was" data-en data-h="Concern">Engineering habits &amp; interfaces</td><td class="was" data-zh hidden data-h="关注领域">工程习惯与接口</td>
-          <td class="now" data-en data-h="Basis"><a href="https://google.github.io/eng-practices/">Software Engineering at Google</a>, <a href="https://learn.scientific-python.org/development/">Scientific Python</a>, research-code commenting standard</td><td class="now" data-zh hidden data-h="依据">[Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范</td>
+          <td class="now" data-en data-h="Basis"><a href="https://google.github.io/eng-practices/">Software Engineering at Google</a>, <a href="https://learn.scientific-python.org/development/">Scientific Python</a>, research-code commenting standard</td><td class="now" data-zh hidden data-h="依据"><a href="https://google.github.io/eng-practices/">Software Engineering at Google</a>、<a href="https://learn.scientific-python.org/development/">Scientific Python</a>、科研代码注释规范</td>
         </tr>
         <tr>
           <td class="was" data-en data-h="Concern">LLM coding discipline</td><td class="was" data-zh hidden data-h="关注领域">LLM 编码纪律</td>
-          <td class="now" data-en data-h="Basis"><a href="https://github.com/multica-ai/andrej-karpathy-skills">Karpathy Skills</a></td><td class="now" data-zh hidden data-h="依据">[Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)</td>
+          <td class="now" data-en data-h="Basis"><a href="https://github.com/multica-ai/andrej-karpathy-skills">Karpathy Skills</a></td><td class="now" data-zh hidden data-h="依据"><a href="https://github.com/multica-ai/andrej-karpathy-skills">Karpathy Skills</a></td>
         </tr>
       </tbody>
     </table>
@@ -452,15 +423,6 @@ EOF</pre>
     }catch(e){}
     setTheme(savedTheme);
     setLang(savedLang);
-
-    /* ---- ledger reveal (respects reduced motion) ---- */
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(!reduce){
-      document.querySelectorAll('#ledger .row').forEach(function(r,i){
-        r.style.animationDelay = (140 + i*90) + 'ms';
-        r.classList.add('in');
-      });
-    }
   })();
 </script>
 </body>

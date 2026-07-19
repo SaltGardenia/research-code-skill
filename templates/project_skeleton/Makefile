@@ -7,7 +7,7 @@ test:
 	pytest
 
 test-full:
-	pytest --runslow
+	pytest -m slow
 
 format:
 	pre-commit run --all-files

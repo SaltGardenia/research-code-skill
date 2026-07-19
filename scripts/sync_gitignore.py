@@ -23,9 +23,13 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import logging
 import os
 import sys
 from typing import List
+
+logging.basicConfig(level=logging.INFO, format="%(message)s")
+logger = logging.getLogger("sync_gitignore")
 
 # --- Fixed rules that are always correct, regardless of layout -------------
 ALWAYS = [
@@ -116,7 +120,7 @@ def sync(root: str) -> bool:
 
     old_block = current_block(text)
     if old_block == new_block:
-        print(f"[sync_gitignore] {gi_path} already up to date.")
+        logger.info(f"[sync_gitignore] {gi_path} already up to date.")
         return False
 
     # Strip any previous auto block, then append the fresh one.
@@ -125,7 +129,7 @@ def sync(root: str) -> bool:
     text = text.rstrip() + "\n\n" + new_block + "\n"
     with open(gi_path, "w", encoding="utf-8") as fh:
         fh.write(text)
-    print(f"[sync_gitignore] updated {gi_path}")
+    logger.info(f"[sync_gitignore] updated {gi_path}")
     return True
 
 
@@ -138,7 +142,7 @@ def main() -> int:
 
     root = os.path.abspath(args.path)
     if not os.path.isdir(root):
-        print(f"error: path not found: {root}", file=sys.stderr)
+        logger.error(f"error: path not found: {root}")
         return 2
 
     gi_path = os.path.join(root, ".gitignore")
@@ -151,10 +155,10 @@ def main() -> int:
 
     if args.check:
         if old_block != new_block:
-            print("[sync_gitignore] DRIFT: .gitignore is out of date. "
-                  "Run scripts/sync_gitignore.py to fix.")
+            logger.warning("[sync_gitignore] DRIFT: .gitignore is out of date. "
+                           "Run scripts/sync_gitignore.py to fix.")
             return 1
-        print("[sync_gitignore] OK: .gitignore is in sync.")
+        logger.info("[sync_gitignore] OK: .gitignore is in sync.")
         return 0
 
     sync(root)

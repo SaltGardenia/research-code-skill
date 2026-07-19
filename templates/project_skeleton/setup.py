@@ -11,4 +11,14 @@ setup(
         "rootutils",
         "omegaconf",
     ],
+    extras_require={
+        "dev": [
+            "black",
+            "isort",
+            "ruff",
+            "mypy",
+            "pytest",
+            "pre-commit",
+        ],
+    },
 )

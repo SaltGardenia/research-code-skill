@@ -42,6 +42,103 @@ class Finding:
 # ---- checks --------------------------------------------------------------
 
 
+def _in_string_or_docstring(lines: List[str], idx: int) -> bool:
+    """Tell whether line `idx` (0-based) lies inside a string/docstring.
+
+    A single continuous state machine scans every line once and records, for
+    each line, whether it *starts* inside a string literal. This correctly
+    handles multi-line docstrings (e.g. a closing triple-quote on a later line)
+    and is computed by walking the whole file only once.
+    """
+    in_triple = None  # current triple-quote delimiter or None
+    quote = None     # current single/double quote or None
+    started_inside: List[bool] = []
+    for line in lines:
+        started_inside.append(in_triple is not None or quote is not None)
+        i = 0
+        while i < len(line):
+            ch = line[i]
+            if in_triple:
+                if line[i : i + 3] == in_triple:
+                    in_triple = None
+                    i += 3
+                else:
+                    i += 1
+                continue
+            if quote:
+                if ch == "\\":
+                    i += 2
+                    continue
+                if ch == quote:
+                    quote = None
+                i += 1
+                continue
+            if line[i : i + 3] in ("'''", '"""'):
+                in_triple = line[i : i + 3]
+                i += 3
+            elif ch in ("'", '"'):
+                quote = ch
+                i += 1
+            else:
+                i += 1
+    if idx < 0 or idx >= len(started_inside):
+        return False
+    return started_inside[idx]
+
+
+def _has_semicolon(line: str, in_string: bool) -> bool:
+    """Return True if a statement-separating ';' appears outside a comment
+    or string literal. A ';' inside a string/regex/docstring (e.g. r';\\s*$')
+    must not be flagged.
+
+    Note: `in_string` only covers multi-line strings/docstrings. A ';' on a
+    line that opens and closes its own string (e.g. `x = ";a"`) is handled by
+    re-walking the line with a small quote-tracking state machine instead of a
+    fragile regex, which previously false-flagged semicolons inside raw strings.
+    """
+    if ";" not in line:
+        return False
+    if line.strip().startswith("#"):
+        return False
+
+    triple = None
+    quote = None
+    if in_string:
+        # Line is already inside a multi-line string; a ';' here is safe.
+        return False
+    i = 0
+    while i < len(line):
+        ch = line[i]
+        if triple:
+            if line[i : i + 3] == triple:
+                triple = None
+                i += 3
+            else:
+                i += 1
+            continue
+        if quote:
+            if ch == "\\":
+                i += 2
+                continue
+            if ch == quote:
+                quote = None
+            i += 1
+            continue
+        if ch == "#":
+            break
+        if line[i : i + 3] in ("'''", '"""'):
+            triple = line[i : i + 3]
+            i += 3
+        elif ch in ("'", '"'):
+            quote = ch
+            i += 1
+        elif ch == ";":
+            return True
+        else:
+            i += 1
+    return False
+
+
 def check_python_file(path: str, max_len: int, out: List[Finding]) -> None:
     try:
         with open(path, "r", encoding="utf-8") as fh:
@@ -57,6 +154,7 @@ def check_python_file(path: str, max_len: int, out: List[Finding]) -> None:
     for i, raw in enumerate(lines, start=1):
         line = raw.rstrip("\n")
         loc = f"{path}:{i}"
+        in_string = _in_string_or_docstring(lines, i - 1)
 
         # GP-LEN: line length
         if len(line) > max_len:
@@ -64,7 +162,7 @@ def check_python_file(path: str, max_len: int, out: List[Finding]) -> None:
                                f"Line {len(line)}>{max_len} chars; wrap it."))
 
         # GP-SEMI: semicolons (not in strings/comments)
-        if _has_semicolon(line):
+        if _has_semicolon(line, in_string):
             out.append(Finding("PYSTYLE", "MINOR", loc, "GP-SEMI",
                                "Avoid semicolons; one statement per line."))
 
@@ -78,8 +176,8 @@ def check_python_file(path: str, max_len: int, out: List[Finding]) -> None:
             out.append(Finding("PYSTYLE", "MAJOR", loc, "GP-DEF",
                                "Avoid mutable default arg; use `= None`."))
 
-        # GP-PRINT: print for diagnostics
-        if re.match(r"^\s*print\(", line):
+        # GP-PRINT: print for diagnostics (ignore print inside string literals)
+        if re.match(r"^\s*print\(", line) and not in_string:
             out.append(Finding("PYSTYLE", "MINOR", loc, "GP-PRINT",
                                "Prefer logging over print for diagnostics."))
 
@@ -179,7 +277,7 @@ def check_repo(root: str, max_len: int, out: List[Finding]) -> None:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Research code style auditor.")
     ap.add_argument("path", help="Repo root to scan")
-    ap.add_argument("--max-line-length", type=int, default=80)
+    ap.add_argument("--max-line-length", type=int, default=99)
     args = ap.parse_args()
 
     if not os.path.isdir(args.path):

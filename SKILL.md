@@ -50,10 +50,9 @@ compatibility:
 
 # Research Code Skill
 
-> **For developers (human readers):** every Markdown file in this skill ships with
-> a Chinese companion (`.zh.md`, e.g. `SKILL.zh.md`, `references/*.zh.md`) for
-> easier reading. The agent always loads the **English** original; the `.zh.md`
-> files are documentation only and are never the source of truth.
+> **For developers (human readers):** all documentation in this skill is written
+> in English, which is the source of truth. The agent always loads the **English**
+> originals.
 
 A skill that acts as the **coding-standard layer** of a research lab's ML/DL
 project. Rather than reviewing code after the fact, it lives in the agent's
