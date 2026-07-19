@@ -19,14 +19,18 @@ registry shows exactly which `LHT-/HY-/GP-*` code owns each concern.
 
 ## 1. Directory layout (STRUCTURE — `LHT-*`)
 
-> **AUTHORITATIVE, FROZEN LAYOUT.** The tree below is the *only* allowed project
-> structure. It is copied **verbatim** from `templates/project_skeleton/` when
-> scaffolding (Scenario A). **No free-form invention is permitted**: do not add,
-> rename, merge, or drop any directory or file shown here, and do not introduce
-> alternatives. If the target already has a different layout (Scenario B), you
-> RESTRUCTURE it to match this tree exactly — never the other way around. The
-> `<project>` placeholder is the only substitution allowed (replaced by the
-> project name).
+> **AUTHORITATIVE, FROZEN SKELETON.** The tree below is the *required* project
+> structure. Directories and fixed-name files are mandated and must be present
+> (enforced as `LHT-STRICT` BLOCKER). It is copied from
+> `templates/project_skeleton/` when scaffolding (Scenario A). Config-group
+> entries named `project` (e.g. `configs/model/project.yaml`) are **group
+> placeholders**, not literal filenames: a group only needs *at least one* config
+> file, so add your own named configs (e.g. `configs/model/resnet.yaml`) and
+> drop or keep the `project.yaml` stub. Extra configs/files beyond the skeleton
+> (more models, experiments, data configs) are **permitted** — do not flag them.
+> If the target already has a different layout (Scenario B), you RESTRUCTURE it to
+> provide the same skeleton — never the other way around. The `<project>`
+> placeholder is the only substitution allowed (replaced by the project name).
 
 ```
 <project>/
@@ -87,11 +91,13 @@ registry shows exactly which `LHT-/HY-/GP-*` code owns each concern.
 > `src/data/...`). The directory tree above is the invariant; what lives *inside*
 > `src/data`, `src/models`, `src/utils` follows the same role split.
 >
-> **`<project>` placeholder note:** the on-disk scaffold copies files verbatim
-> with the literal name `project` (e.g. `configs/data/project.yaml`,
-> `configs/model/project.yaml`). `<project>` in the tree above is the
-> human-readable placeholder; the generated tree matches `MANIFEST.md` exactly
-> and is verified by `scripts/audit_style.py` (rule `LHT-STRICT`).
+> **`<project>` placeholder note:** the on-disk scaffold ships stub files with
+> the literal name `project` (e.g. `configs/data/project.yaml`,
+> `configs/model/project.yaml`) as examples. `<project>` in the tree above is the
+> human-readable placeholder; the generated tree matches `MANIFEST.md`, and
+> `scripts/audit_style.py` verifies the **skeleton** via `LHT-STRICT` — a group
+> placeholder is satisfied by *any* config file in that group directory, so named
+> configs you add are accepted.
 
 ### Enforced layout rules (`LHT-*`)
 

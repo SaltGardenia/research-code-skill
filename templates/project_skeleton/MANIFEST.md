@@ -4,9 +4,14 @@ Copy these files into an empty target repo when the user asks to initialize a
 clean research project. Replace `<project>` with the project name. Do NOT
 overwrite existing user files.
 
-The layout below is the **frozen, authoritative directory tree** (identical to
-the tree in `references/scaffold_grammar.md` section 1). It is the *only* allowed
-structure — copy it verbatim, no additions, renames, or omissions.
+The layout below is the **frozen structural skeleton** (identical to the tree in
+`references/scaffold_grammar.md` section 1). The directories and fixed-name
+files are required and must be present. Config-group entries named `project`
+(e.g. `configs/model/project.yaml`) are **group placeholders**: they require the
+group directory to contain *at least one* config file — you should add your own
+named configs (e.g. `configs/model/resnet.yaml`) and may keep or drop the
+literal `project.yaml`. Additional files and configs beyond the skeleton are
+permitted (extra models, experiments, data configs, etc.).
 
 - .github/workflows/                 (Github Actions workflows)
 - configs/callbacks/default.yaml

@@ -270,19 +270,19 @@ Use `scripts/audit_style.py` as a conformance gate (it checks a subset of these
 codes). The full rule registry lives in `references/coordination.md`.
 
 ### Step 5 鈥?Build from zero (Scenario A)
-Used when the target is empty or absent. The directory structure is **frozen and
-non-negotiable** 鈥? copy it **verbatim**, no free-form invention.
+Used when the target is empty or absent. The directory structure is a **frozen
+skeleton** — required directories and fixed-name files must be present, but you
+may add your own configs and files on top of it.
 
 1. Load `references/scaffold_grammar.md` (section 1: the authoritative directory
    tree) and `templates/project_skeleton/MANIFEST.md` (the exact file list).
-2. **Copy the entire `templates/project_skeleton/` tree into the target repo as-is.**
-   This is a literal copy 鈥? do **not** add, rename, merge, or drop any directory
-   or file listed in `MANIFEST.md`, and do **not** substitute your own layout.
-   Files ship with the literal name `project` (e.g. `configs/data/project.yaml`,
-   `configs/model/project.yaml`); copy them verbatim so the generated tree matches
-   `MANIFEST.md` exactly and passes `scripts/audit_style.py` (LHT-STRICT). Renaming
-   `project` to the real project name is an optional later step and must keep the
-   same paths.
+2. **Copy the `templates/project_skeleton/` tree into the target repo.** Required
+   directories and fixed-name files are mandatory (enforced as `LHT-STRICT` BLOCKER).
+   Config-group stubs named `project` (e.g. `configs/data/project.yaml`,
+   `configs/model/project.yaml`) are **placeholders**: the group directory only
+   needs at least one config file, so replace them with your own named configs
+   (e.g. `configs/model/resnet.yaml`) — no need to keep the literal `project.yaml`.
+   Additional configs/files beyond the skeleton are permitted.
 3. Do not overwrite existing user files; report exactly what was created and what
    was skipped.
 4. Then continue with Steps 1鈥? as you write each new file, so the project conforms

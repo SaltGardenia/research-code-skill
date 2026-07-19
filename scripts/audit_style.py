@@ -274,6 +274,14 @@ def check_repo(root: str, max_len: int, out: List[Finding]) -> None:
     _check_manifest_conformance(root, out)
 
 
+# Manifest entries whose basename (without extension) is `project` are
+# *group placeholders*: they mean "this config group directory must contain at
+# least one config file", not "a file literally named `project.yaml` must
+# exist". This lets users add real configs (e.g. configs/model/resnet.yaml)
+# without tripping LHT-STRICT. Every other entry is enforced verbatim.
+_GROUP_PLACEHOLDER_STEMS = {"project"}
+
+
 def _parse_manifest_entries(manifest_path: str) -> List[str]:
     """Return the canonical file/dir list from a MANIFEST.md.
 
@@ -299,14 +307,34 @@ def _parse_manifest_entries(manifest_path: str) -> List[str]:
     return entries
 
 
+def _group_placeholder_entries(entries: List[str]) -> List[str]:
+    """Return manifest entries that are group placeholders (basename `project`).
+
+    A placeholder like `configs/model/project.yaml` is satisfied by *any* file
+    in `configs/model/`, so we record just the directory part for later checks.
+    """
+    dirs: List[str] = []
+    for entry in entries:
+        rel = entry.replace("<project>", "project")
+        if rel.endswith("/"):
+            continue
+        if os.path.splitext(os.path.basename(rel))[0] in _GROUP_PLACEHOLDER_STEMS:
+            dirs.append(os.path.dirname(rel).replace(os.sep, "/"))
+    return dirs
+
+
 def _check_manifest_conformance(root: str, out: List[Finding]) -> None:
-    """Ensure the repo layout matches the frozen MANIFEST exactly.
+    """Ensure the repo layout keeps the frozen structural skeleton.
 
     The MANIFEST lives next to this script (templates/project_skeleton/
-    MANIFEST.md). Any file/dir listed there that is missing in `root` is a
-    BLOCKER: the structure is frozen and non-negotiable. The only allowed
-    substitution is the `<project>` placeholder, replaced by the repo's
-    directory name.
+    MANIFEST.md). The skeleton is *frozen* in the sense that required
+    directories and fixed-name files must be present (a missing one is a
+    BLOCKER). However, config-group placeholders named `project`
+    (e.g. `configs/model/project.yaml`) are satisfied by **any** config file in
+    that group directory — users are expected to add real named configs instead
+    of the literal `project.yaml`. Extra files/dirs beyond the skeleton are
+    permitted (e.g. `configs/model/resnet.yaml`, `configs/experiment/foo.yaml`).
+    This makes LHT-STRICT a skeleton gate, not a verbatim-file gate.
     """
     here = os.path.dirname(os.path.abspath(__file__))
     manifest_path = os.path.join(
@@ -317,12 +345,15 @@ def _check_manifest_conformance(root: str, out: List[Finding]) -> None:
     entries = _parse_manifest_entries(manifest_path)
     if not entries:
         return
-    # The template ships files with the literal name `project`
-    # (e.g. configs/data/project.yaml). `<project>` in the MANIFEST is the
-    # human-readable placeholder; the on-disk name after a verbatim copy is
-    # `project`, which is what we verify against.
+
+    placeholders = set(_group_placeholder_entries(entries))
+    placeholder_hits = {d: False for d in placeholders}
+
     for entry in entries:
         rel = entry.replace("<project>", "project")
+        # Group placeholders are checked separately below.
+        if not rel.endswith("/") and os.path.splitext(os.path.basename(rel))[0] in _GROUP_PLACEHOLDER_STEMS:
+            continue
         target = os.path.join(root, rel)
         is_dir = rel.endswith("/")
         if is_dir:
@@ -333,7 +364,21 @@ def _check_manifest_conformance(root: str, out: List[Finding]) -> None:
             out.append(Finding(
                 "STRUCTURE", "BLOCKER", os.path.join(root, rel), "LHT-STRICT",
                 f"Frozen layout violation: missing required {rel} "
-                f"(must match MANIFEST.md exactly).",
+                f"(the structural skeleton from MANIFEST.md must be present).",
+            ))
+
+    # Each group placeholder dir must contain at least one file.
+    for d in placeholders:
+        abs_dir = os.path.join(root, d)
+        has_file = os.path.isdir(abs_dir) and any(
+            os.path.isfile(os.path.join(abs_dir, fn)) for fn in os.listdir(abs_dir)
+        )
+        if not has_file:
+            out.append(Finding(
+                "STRUCTURE", "MAJOR", os.path.join(root, d), "LHT-STRICT",
+                f"Config group '{d}/' has no config file; add at least one "
+                f"(e.g. {d}/<your_model>.yaml). The 'project' placeholder is "
+                f"satisfied by any config in this group.",
             ))
 
 
