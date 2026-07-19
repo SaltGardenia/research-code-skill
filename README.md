@@ -1,221 +1,91 @@
 # Research Code Skill
 
 [![Skill](https://img.shields.io/badge/skill-research--code-blue)](https://github.com/SaltGardenia/research-code-skill)
-[![Clusters](https://img.shields.io/badge/clusters-4%20fused-brightgreen)](https://github.com/SaltGardenia/research-code-skill)
-[![Conformance](https://img.shields.io/badge/conformance-checked-informational)](https://github.com/SaltGardenia/research-code-skill)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://www.python.org)
 
-> Keep your research (ML/DL) codebase clean and consistent.
-> The Agent applies these standards **as it writes and edits code** — not as a
-> post-hoc review.
->
+> 让科研（ML/DL）代码库保持整洁、一致。Agent 在**编写和修改代码的过程中**就应用这套标准，而非事后审查。
 > [中文文档 →](./README.zh.md)
->
-> **Developer note:** every Markdown file in this skill has a Chinese companion
-> (`.zh.md`) for human readers — e.g. `SKILL.zh.md`, `references/*.zh.md`,
-> `examples/*.zh.md`. Agents load the **English** originals; the `.zh.md` files
-> are documentation only.
 
-## What it does
+## 能力列表
 
-The skill enforces two standards whenever the Agent works on your code:
+- 项目层面，建立一套清晰、可预期的结构并长期保持。
+- 代码层面，注释讲清思路、API 设计合理、模块化完善。
+- 实验参数一律走配置文件，代码只从配置读取，杜绝硬编码。
+- 模型与系统分离，模型自包含，遵循固定方法顺序。
+- 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
+- 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
+- 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
+- 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
+- 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
+- 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
 
-1. **Project-level standard.** The Agent establishes one clear, predictable
-   structure for the project and maintains it — so the structure stays stable and
-   consistent as the code grows.
-2. **Code-level standard.** Within that structure, the code stays healthy:
-   **comments that explain the reasoning, sensible API design, and thorough
-   modularization** — so the code is easy to read, reuse, and extend.
+## 两个场景示例
 
-Every guideline is encoded as a concrete, checkable rule, so the skill applies
-and verifies the standard during work rather than merely referencing documents.
+**A. 从零搭建**
+> “在这里新建一个科研项目，并添加一个在 CIFAR 上训练的模型。”
+> Agent 从骨架搭建结构，再按规范写 `src/`、`configs/`、Hydra `_target_`。
 
-## Secondary practices
+**B. 整理已有仓库**
+> “整理这个仓库：把代码归入正确目录，把训练参数改成配置，并保持命名统一。”
+> Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。
 
-The two standards above are reinforced by well-established practices:
+## 项目结构示例
 
-- **Reproducible experiments** — settings are recorded and data is identified and
-  version-locked, so a result can be reproduced later.
-- **Clean composition** — adding a model or option is a small, self-contained
-  addition rather than another special case; names describe what things are.
-- **Automatic consistency** — basic formatting and checks run before code is
-  accepted, so uniformity is enforced by the process.
+Agent 搭建或整理后产出的标准结构：
 
-### Comments
+```
+<project>/
+├── configs/                 # Hydra 配置，按关注点分组
+│   ├── data/  model/  trainer/
+│   ├── callbacks/  logger/  experiment/
+│   ├── train.yaml  eval.yaml
+├── src/
+│   ├── data/                # LightningDataModule
+│   ├── models/              # 模型骨干 + LightningModule
+│   │   ├── components/  <project>_module.py
+│   ├── utils/               # 工具与实例化逻辑
+│   ├── train.py  eval.py    # @hydra.main 入口
+├── tests/                   # 冒烟 + 单元测试
+├── data/  logs/  notebooks/  # 数据 / 运行输出 / 笔记（git 忽略）
+├── .env.example  .project-root
+├── .gitignore  .pre-commit-config.yaml
+├── pyproject.toml  requirements.txt
+└── README.md
+```
 
-As part of the code-level standard, comments in a research project capture
-what is easy to lose: **research intent, reasoning, design decisions, and
-experimental constraints** — so the code conveys the thinking, not just the
-steps. The skill ensures comments explain **why, not merely what**, document
-what others will rely on, record the relevant math and its source, and are
-updated or removed when they become stale.
+## 参考项目
 
-### Comparison with an unorganized repo
+| 关注领域 | 依据 |
+|------|------|
+| 项目结构与写法 | [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)、[Hydra](https://hydra.cc/)、[Google Python Style](https://google.github.io/styleguide/pyguide.html) |
+| 模型与组件设计 | [PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html)、[timm](https://github.com/huggingface/pytorch-image-models)、[OpenMMLab](https://github.com/open-mmlab) |
+| 可复现实验 | [Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch) |
+| 工程习惯与接口 | [Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范 |
 
-A research repo that grows without structure accumulates recurring problems. The
-skill's fixed structure addresses them:
+## 快速开始
 
-| Unorganized repo | Repo shaped by this skill | Benefit |
-|-------------------|-----------------------------|---------------|
-| Experiment settings scattered and hardcoded in code | All settings gathered in one organized place | Trying alternatives and reproducing runs is straightforward |
-| Near-duplicate files accumulate as work evolves | One clear home for reusable pieces | Reuse instead of copy; shared logic written once |
-| A growing list of special-case branches to pick behavior | New options slot in cleanly | Adding an option touches one place, not a fragile central list |
-| Data dropped in a folder with no version or notes | Data that is identified, described, and version-locked | Every run records exactly which data it used |
-| "Which version?" answered by a chat message | Clear release versions tied to a snapshot of the code | Results map back to exact code and settings |
-| Descriptions rot as the code changes | Descriptions updated in the same change | What you read always matches what the code does |
-| Checks run occasionally, by hand, if at all | Checks run automatically as a required step | Consistency is enforced, not left to chance |
-
-## Two main scenarios
-
-**A. Build from zero.** Start a new project that follows the standard from the
-first commit.
-
-> Tell the Agent:
-> "Start a new research project here and add a model that trains on CIFAR."
-
-**B. Tidy an existing repo.** Bring a messy repo into the standard structure.
-
-> Tell the Agent:
-> "Organize this repo: move code into the right folders, turn the training
-> flags into configs, and keep the naming consistent."
-
-## Key principle when tidying a repo
-
-The Agent **never arbitrarily deletes or rewrites your code**. It reorganizes by
-moving and renaming, preserving behavior. If a piece of code has no matching
-target folder, it is **left in the project root** rather than removed.
-
-## The structure it builds
-
-When starting from zero, the Agent sets up one consistent, predictable project
-structure and then works inside it. In concrete terms, that means separate,
-clear homes for:
-
-- **Settings** — everything that controls an experiment, organized by purpose
-  so a run is fully described by its settings.
-- **Code** — separate places for data handling, models, and shared helpers.
-- **Entry points** — clear ways to start training or evaluation.
-- **Tests** — quick checks that the project still holds together.
-- **Project files** — the standard supporting files a healthy project keeps at
-  its root.
-
-Each part has a clear owner in the standard, so there is never ambiguity
-about where something belongs. This structure is the **invariant**: the Agent
-writes and rearranges code *inside* it and never swaps it for a different one.
-
-## What it's built on
-
-The two standards draw on widely-trusted, authoritative practices, listed
-here by area of focus:
-
-| Area of focus | Grounded in |
-|------|-------------|
-| **Project layout & writing style** | [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template), [Hydra](https://hydra.cc/), [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) |
-| **Model & component design** | [PyTorch Lightning Style Guide](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html), [timm](https://github.com/huggingface/pytorch-image-models), [OpenMMLab](https://github.com/open-mmlab) |
-| **Reproducible experiments** | [Hydra](https://hydra.cc/), [FAIR Data Principles](https://www.go-fair.org/fair-principles/), [Semantic Versioning](https://semver.org/), [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/), [Meta Research](https://github.com/facebookresearch) |
-| **Engineering habits & clear interfaces** | [Software Engineering at Google](https://google.github.io/eng-practices/), [Scientific Python](https://learn.scientific-python.org/development/), Research Code Comment Standard |
-
-## How to use it
-
-Ask the Agent to work on your research code (build, add, refactor, name,
-organize). It loads this skill automatically and applies the standard as it
-works — including running the quality checks for you.
-
-## What's in the box (tooling)
-
-The skill ships with scripts that keep the repo clean and the standard enforced.
-Run them yourself if you want the same result the Agent produces.
-
-| Script | Purpose |
-|--------|---------|
-| `scripts/audit_style.py <path>` | Conformance probe (subset of `LHT-/HY-/PL-/GP-*`): emits the fixed findings table. |
-| `scripts/sync_gitignore.py [path]` | Auto-maintains `.gitignore` from the current directory layout. Derives ignore entries inside a marked auto-managed block; hand-written rules are preserved. Use `--check` in CI. |
-| `scripts/run_gate.sh` / `scripts/run_gate.ps1` | Runs the mandatory quality gate (`black`/`isort`/`ruff`/`mypy`/`pytest`) with all tool caches redirected into `.cache/`. |
-
-### Caches are aggregated, not scattered
-
-Tool caches and run artifacts that have **no direct relation to the project
-code** are swept into a single `.cache/` folder at the repo root
-(`.mypy_cache/`, `.pytest_cache/`, `.ruff_cache/`, `.coverage`, `htmlcov/`).
-Hydra run outputs (`logs/`, `outputs/`, `wandb/`) stay at the root as real
-experiment artifacts. Everything under `.cache/` is already covered by
-`.gitignore` and never committed — see `.cache/README.md`.
-
-### Auto-maintained .gitignore
-
-After scaffolding (Scenario A) or tidying (Scenario B), the Agent runs
-`python scripts/sync_gitignore.py .` so the ignore list always tracks the
-current layout — new product directories (`logs/`, `wandb/`, `checkpoints/`, …)
-are ignored automatically without hand-editing.
-
-## Installation
-
-This skill is a single installable unit. Keep a stable copy of the repo, then
-point your agent at the skill's main file. The whole folder must accompany it,
-since the skill requires the supporting files to function.
-
-### Claude Code
-
-First clone to a stable path (do not develop inside this clone):
+克隆到稳定路径（不要在此副本内开发），让 Agent 指向 `SKILL.md`：
 
 ```bash
-npm install -g @anthropic-ai/claude-code
-claude
-mkdir -p ~/ai-skills
 git clone https://github.com/SaltGardenia/research-code-skill.git ~/ai-skills/research-code-skill
 ```
 
-Recommended: a subagent wrapper that loads the skill's main file:
+Claude Code 用 subagent 加载主文件：
 
 ```bash
 mkdir -p ~/.claude/agents
 cat > ~/.claude/agents/research-code-skill.md <<'EOF'
 ---
 name: research-code-skill
-description: Use for building or tidying a research (ML/DL) codebase with a fixed structure and uniform conventions.
+description: 用于以固定结构、统一规范搭建或整理科研（ML/DL）代码库。
 ---
-
 When invoked, first read `~/ai-skills/research-code-skill/SKILL.md` and follow it as the governing workflow.
 Read supporting files from `~/ai-skills/research-code-skill/` only when needed.
 Do not replace this skill with a generic coding response.
 EOF
 ```
 
-Then start a new Claude Code session and ask the subagent to work on your code.
-Prefer a subagent (or a slash command) over copying the folder into
-`~/.claude/skills/`, so the directory structure stays intact.
+其他 Agent（Kilo、Codex 等）同样保留完整文件夹，创建指向主文件的 subagent / slash command / 自定义 prompt。更新：`cd ~/ai-skills/research-code-skill && git pull`。
 
-To update later:
-
-```bash
-cd ~/ai-skills/research-code-skill
-git pull
-```
-
-### Other agents (Kilo, Codex, OpenClaw, OpenCode, Hermes)
-
-Keep a stable copy, then create a lightweight subagent, slash command, or
-custom-prompt wrapper that points at the skill's main file. For Codex you can
-also just paste the repo link and ask it to read that file and follow it. Example
-prompt:
-
-> Install this skill from https://github.com/SaltGardenia/research-code-skill.git
-> and follow its main file. Keep the full folder, not just that one file.
-
-### Python dependency (only if you run the checker yourself)
-
-The quality gate is run automatically by the Agent. If you want to run
-the checker locally, install the project's Python tools:
-
-```bash
-python -m pip install -r requirements.txt
-```
-
-Then run the conformance probe and the auto-`.gitignore` sync:
-
-```bash
-python scripts/audit_style.py .            # conformance findings table
-python scripts/sync_gitignore.py .         # keep .gitignore in sync with layout
-bash scripts/run_gate.sh                   # full quality gate, caches -> .cache/
-```
+本地运行检查器：`python -m pip install -r requirements.txt`，然后 `python scripts/audit_style.py .`、`python scripts/sync_gitignore.py .`、`bash scripts/run_gate.sh`。
