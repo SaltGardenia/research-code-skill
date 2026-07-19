@@ -4,34 +4,34 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://www.python.org)
 
-> 让科研（ML/DL）代码库保持整洁、一致。Agent 在**编写和修改代码的过程中**就应用这套标准，而非事后审查。
+> 让科研代码库整洁、一致。Agent 边写边改，边应用标准。不做事后审查。
 > [English →](./README.en.md)
 
 ## ✨ 能力列表
 
-- 🏗️ 项目层面：建立清晰、可预期的结构，并长期保持（Lightning-Hydra-Template 布局）。
-- 💬 高质量注释：简洁有力、高度概括、短句优先、拆分长句；讲清 why 而非 what，公式带引用、设计决策带 Reason、TODO/FIXME/WARNING 规范、论文核心模块独立 doc block。
-- 🎨 Python 风格与命名：snake_case/CapWords/UPPER_CASE、import 分组、docstring、类型注解、行宽约定。
-- ⚙️ 实验参数一律走配置：代码只从 `cfg` 读取，杜绝硬编码字面量。
-- 🧩 模型与系统分离：模型自包含，遵循固定方法顺序；LightningModule 用 torchmetrics、`/` 命名指标、显式 `configure_optimizers`、DDP 友好。
-- 🏛️ 命名架构与可插拔：timm 风格（layers/blocks/architectures），OpenMMLab Registry 注册即用，拒绝 `if model == "..."` 分支。
-- 🔁 实验可复现：配置、数据版本（FAIR）、代码 tag（SemVer/Git Flow）三者绑定，结果可重生；禁止 `train_v2_final.py`。
-- 🚦 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
-- 📦 以可安装包交付，CI 跑风格 + 类型检查；小步评审、接口文档不漂移。
-- 🧠 行为纪律（Karpathy）：先想后写、保持简单、外科手术式改动、目标驱动执行。
-- 🔧 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
-- 📂 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
-- 🤝 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
-- 📏 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
+- 🏗️ 项目层面：结构清晰、可预期，长期保持。
+- 💬 高质量注释：简洁有力，短句优先。讲 why，不讲 what。公式带引用，决策带 Reason，TODO/FIXME/WARNING 规范，论文核心模块单列 doc block。
+- 🎨 Python 风格与命名：snake_case / CapWords / UPPER_CASE。import 分组，docstring 齐全，类型注解到位，行宽统一。
+- ⚙️ 实验参数全走配置。代码只读 `cfg`，不写死字面量。
+- 🧩 模型与系统分离。模型自包含，方法顺序固定。LightningModule 用 torchmetrics，`/` 命名指标，显式 `configure_optimizers`，DDP 友好。
+- 🏛️ 命名架构加可插拔。timm 风（layers/blocks/architectures）；OpenMMLab 注册即用；拒绝 `if model == "..."` 分支。
+- 🔁 实验可复现。配置、数据版本（FAIR）、代码 tag（SemVer/Git Flow）三者绑定。结果可重生。禁止 `train_v2_final.py`。
+- 🚦 强制质量门：black / isort / ruff / mypy / pytest。变更通过后才接受。
+- 📦 以可安装包交付。CI 跑风格与类型检查。小步评审，接口文档不漂移。
+- 🧠 行为纪律（Karpathy）：先想后写，保持简单，外科手术式改动，目标驱动执行。
+- 🔧 自动维护 `.gitignore`。随结构变化同步规则，不破坏手写项。
+- 📂 产物收口到 `.cache/`。仓库根不散落缓存。
+- 🤝 不删不改你的代码。只移动、重命名，保持行为不变。
+- 📏 规范即规则，可检查。随工作实时应用，而非仅引用文档。
 
 ## 🎯 两个场景示例
 
 **A. 从零搭建**
 > “在这里新建一个科研项目，并添加一个在 CIFAR 上训练的模型。”
-> Agent 从骨架搭建结构，再按规范写 `src/`、`configs/`、Hydra `_target_`。
+> Agent 从骨架建结构，再按规范写 `src/`、`configs/`、Hydra `_target_`。
 
 **B. 整理已有仓库**
-> “整理这个仓库：把代码归入正确目录，把训练参数改成配置，并保持命名统一。”
+> “整理这个仓库：代码归位，训练参数改配置，命名统一。”
 > Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。
 
 ## 📂 项目结构示例
@@ -103,4 +103,4 @@ EOF
 
 其他 Agent（Kilo、Codex 等）同样保留完整文件夹，创建指向主文件的 subagent / slash command / 自定义 prompt。更新：`cd ~/ai-skills/research-code-skill && git pull`。
 
-本地运行检查器：`python -m pip install -r requirements.txt`，然后 `python scripts/audit_style.py .`、`python scripts/sync_gitignore.py .`、`bash scripts/run_gate.sh`。
+本地运行检查器：先 `python -m pip install -r requirements.txt`，再依次运行 `python scripts/audit_style.py .`、`python scripts/sync_gitignore.py .`、`bash scripts/run_gate.sh`。

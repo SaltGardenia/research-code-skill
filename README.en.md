@@ -4,37 +4,35 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776AB)](https://www.python.org)
 
-> Keep research codebases tidy and consistent. The agent applies this standard **while writing and editing code**, not as an after-the-fact review.
+> Keep research codebases tidy and consistent. The agent applies this standard **as it writes and edits** — not as an after-the-fact review.
 > [中文文档→](./README.md)
 
 ## ✨ Capabilities
 
-- 🏗️ Project level: establish a clear, predictable structure and keep it that way (Lightning-Hydra-Template layout).
-- 💬 High-quality comments: concise and forceful, highly summarized, short sentences first, long sentences split. Explain why not what; formulas carry citations; design decisions carry a `Reason:`; `TODO`/`FIXME`/`WARNING` disciplined; paper-core modules get a dedicated doc block.
-- 🎨 Python style & naming: snake_case / CapWords / UPPER_CASE, grouped imports, docstrings, type annotations, line-length convention.
-- ⚙️ All experiment parameters live in config; code reads only from `cfg` — no hardcoded literals.
-- 🧩 Models decoupled from systems: self-contained, fixed method order; LightningModule uses torchmetrics, `/`-named metrics, explicit `configure_optimizers`, DDP-friendly.
+- 🏗️ Project level: a clear, predictable structure — kept that way.
+- 💬 High-quality comments: concise, forceful, short-sentence first. Explain why, not what. Formulas carry citations; decisions carry a `Reason:`; `TODO`/`FIXME`/`WARNING` disciplined; paper-core modules get a dedicated doc block.
+- 🎨 Python style & naming: snake_case / CapWords / UPPER_CASE. Grouped imports, full docstrings, type hints, unified line length.
+- ⚙️ Every experiment parameter lives in config. Code reads `cfg` only — no hardcoded literals.
+- 🧩 Models decoupled from systems. Self-contained, fixed method order. LightningModule uses torchmetrics, `/`-named metrics, explicit `configure_optimizers`, DDP-friendly.
 - 🏛️ Named architectures & pluggability: timm style (layers/blocks/architectures); OpenMMLab Registry registers-then-builds; no `if model == "..."` branching.
-- 🔁 Reproducible experiments: config, data version (FAIR), and code tag (SemVer/Git Flow) bound together so results regenerate; no `train_v2_final.py`.
-- 🚦 Mandatory quality gates (black / isort / ruff / mypy / pytest) must pass before a change is accepted.
-- 📦 Ships as an installable package; CI runs style + type checks; small reviewable changes with interface docs that never drift.
+- 🔁 Reproducible experiments: config, data version (FAIR), and code tag (SemVer/Git Flow) bound together. Results regenerate. No `train_v2_final.py`.
+- 🚦 Mandatory quality gates: black / isort / ruff / mypy / pytest. A change must pass before it is accepted.
+- 📦 Ships as an installable package. CI runs style + type checks. Small reviewable changes; interface docs never drift.
 - 🧠 Behavioral discipline (Karpathy): think before coding, simplicity first, surgical changes, goal-driven execution.
-- 🔧 Automaintained `.gitignore`: ignore rules stay in sync as the layout changes, without clobbering hand-written rules.
-- 📂 Run artifacts funneled into `.cache/`, so no cache files litter the repo root.
-- 🤝 Key principle: the agent never deletes or rewrites your code on a whim — it only moves or renames to preserve behavior.
-- 📏 Every rule is encoded as a checkable rule, applied and verified live as work proceeds — not just referenced from docs.
+- 🔧 Automaintained `.gitignore`: rules sync with the layout, hand-written entries preserved.
+- 📂 Run artifacts funnel into `.cache/`; no cache files litter the repo root.
+- 🤝 Never deletes or rewrites your code. Only moves or renames — behavior preserved.
+- 📏 Rules are machine-checkable. Applied live as work proceeds, not just cited from docs.
 
 ## 🎯 Two scenario examples
 
 **A. Build from scratch**
-
 > "Create a new research project here and add a model trained on CIFAR."
-> The agent scaffolds the structure from the skeleton, then writes `src/`, `configs/`, and Hydra `_target_` per the standard.
+> The agent scaffolds from the skeleton, then writes `src/`, `configs/`, and Hydra `_target_` per the standard.
 
 **B. Tidy an existing repo**
-
-> "Tidy this repo: move code into the right directories, turn training params into config, and unify naming."
-> The agent audits drift first, then refactors/rename into compliance and re-runs the gates to confirm.
+> "Tidy this repo: move code into the right dirs, turn training params into config, unify naming."
+> The agent audits drift, then refactors/rename into compliance and re-runs the gates.
 
 ## 📂 Project structure example
 
@@ -73,12 +71,12 @@ Standard structure produced after the agent scaffolds or tidies:
 
 ## 📚 Reference projects
 
-| Concern                         | Basis                                                                                                                                                                                                                                   |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Project structure & style       | [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template), [Hydra](https://hydra.cc/), [Google Python Style](https://google.github.io/styleguide/pyguide.html)                                                    |
-| Model & component design        | [PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html), [timm](https://github.com/huggingface/pytorch-image-models), [OpenMMLab](https://github.com/open-mmlab)                                   |
-| Reproducible experiments        | [Hydra](https://hydra.cc/), [FAIR](https://www.go-fair.org/fair-principles/), [SemVer](https://semver.org/), [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/), [Meta Research](https://github.com/facebookresearch) |
-| Engineering habits & interfaces | [Software Engineering at Google](https://google.github.io/eng-practices/), [Scientific Python](https://learn.scientific-python.org/development/), research-code commenting standard                                                     |
+| Concern | Basis |
+|------|------|
+| Project structure & style | [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template), [Hydra](https://hydra.cc/), [Google Python Style](https://google.github.io/styleguide/pyguide.html) |
+| Model & component design | [PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html), [timm](https://github.com/huggingface/pytorch-image-models), [OpenMMLab](https://github.com/open-mmlab) |
+| Reproducible experiments | [Hydra](https://hydra.cc/), [FAIR](https://www.go-fair.org/fair-principles/), [SemVer](https://semver.org/), [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/), [Meta Research](https://github.com/facebookresearch) |
+| Engineering habits & interfaces | [Software Engineering at Google](https://google.github.io/eng-practices/), [Scientific Python](https://learn.scientific-python.org/development/), research-code commenting standard |
 
 ## 🚀 Quick start
 
@@ -105,4 +103,4 @@ EOF
 
 Other agents (Kilo, Codex, etc.) keep the full folder too: create a subagent / slash command / custom prompt pointing at the main file. Update with: `cd ~/ai-skills/research-code-skill && git pull`.
 
-Run the checker locally: `python -m pip install -r requirements.txt`, then `python scripts/audit_style.py .`, `python scripts/sync_gitignore.py .`, `bash scripts/run_gate.sh`.
+Run the checker locally: install first with `python -m pip install -r requirements.txt`, then `python scripts/audit_style.py .`, `python scripts/sync_gitignore.py .`, `bash scripts/run_gate.sh`.

@@ -201,9 +201,8 @@ only the reference for the operation at hand.
 > - MODEL & COMPONENT 鈫?`references/model_design.md` (`PL-*`, `RC-TIMM-*`, `RC-OPENMMLAB-*`)
 > - EXPERIMENT REPRO 鈫?`references/experiment_repro.md` (`RC-HYDRA-*`, `RC-DATA-*`, `RC-VER-*`, `RC-META-*`)
 > - ENGINEERING PROCESS 鈫?`references/engineering_process.md` (`RC-ENG-*`, `RC-SP-*`, `COMMENT-*`)
-> - cross-cutting -> `references/coordination.md` + `references/rule_cards.md`
-> - BEHAVIORAL DISCIPLINE -> `references/rule_cards.md` (`RC-KARPATHY-*`)
-
+> - cross-cutting → `references/coordination.md` + `references/rule_cards.md`
+> - BEHAVIORAL DISCIPLINE → `references/rule_cards.md` (`RC-KARPATHY-*`)
 ### Always-on behavioral discipline (Karpathy -- applies to EVERY code action)
 These four principles are **summarized here so they stay in context for every
 edit**; the full `RC-KARPATHY-*` cards live in `references/rule_cards.md`.
