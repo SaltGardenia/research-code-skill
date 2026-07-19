@@ -48,6 +48,11 @@ compatibility:
 
 # Research Code Skill
 
+> **For developers (human readers):** every Markdown file in this skill ships with
+> a Chinese companion (`.zh.md`, e.g. `SKILL.zh.md`, `references/*.zh.md`) for
+> easier reading. The agent always loads the **English** original; the `.zh.md`
+> files are documentation only and are never the source of truth.
+
 A skill that acts as the **coding-standard layer** of a research lab's ML/DL
 project. Rather than reviewing code after the fact, it lives in the agent's
 context and **constrains every code operation as it happens**. Its essence is
@@ -254,6 +259,9 @@ from `templates/project_skeleton/` per its `MANIFEST.md`. Copy `configs/` +
 `src/` stubs and root files. Do not overwrite existing user files; report
 exactly what was created and what was skipped. Then continue with Steps 1–4 as
 you write each new file, so the project conforms from the first commit.
+6. **Sync `.gitignore`**: run `python scripts/sync_gitignore.py .` so the ignore
+   list reflects the freshly created layout (the script only maintains its
+   auto-managed block and never touches hand-written rules).
 
 ### Step 6 — Tidy existing repo (Scenario B)
 Used when the target already has code. Apply the conventions by restructuring,
@@ -268,8 +276,12 @@ not just noting gaps:
    per `GP-NAME` / `PL-*`; apply `torchmetrics` and `/`-named logging.
 4. **Preserve behavior** — prefer moving/renaming over deleting; keep outputs
    identical.
-5. **Confirm**: re-run `scripts/audit_style.py`; remaining BLOCKER/MAJOR items
-   must be resolved before declaring the repo tidy.
+ 5. **Confirm**: re-run `scripts/audit_style.py`; remaining BLOCKER/MAJOR items
+    must be resolved before declaring the repo tidy.
+ 6. **Sync `.gitignore`**: run `python scripts/sync_gitignore.py .` so the ignore
+    list tracks the new/relocated directories (e.g. `logs/`, `outputs/`,
+    `wandb/`, `checkpoints/`). The script derives entries from the current
+    layout inside a marked auto-managed block; hand-written rules are preserved.
 
 ### Step 7 — Apply & confirm (both scenarios)
 Write the code to match the convention. When a change touches two layers (e.g.
@@ -295,6 +307,19 @@ Rules:
 - Run all five in order; do not skip any. Fix every error they report.
 - `black`/`isort` may rewrite files — re-read them after, then re-run to
   confirm clean.
+
+### Caches are aggregated, not scattered
+Tool caches and run artifacts that have **no direct relation to the project
+code** are swept into a single `.cache/` folder at the repo root so the tree
+stays clean. This covers only caches (`.mypy_cache/`, `.pytest_cache/`,
+`.ruff_cache/`, `.coverage`, `htmlcov/`) — **not** Hydra run outputs, which
+stay at the root (`logs/`, `outputs/`, `wandb/`) as real experiment artifacts.
+- Redirect caches with the provided helper: `scripts/run_gate.sh` (bash) or
+  `scripts/run_gate.ps1` (PowerShell). It sets `MYPY_CACHE_DIR`,
+  `PYTEST_DEBUG_TEMPROOT`, `COVERAGE_FILE` and `ruff --cache-dir`, then runs
+  the five tools; with `SWEEP_ONLY=1` it only moves loose caches into `.cache/`.
+- All `.cache/` contents are already covered by `.gitignore`, so they are
+  never committed. See `.cache/README.md`.
 - `mypy src/` must reach zero type errors (`strict` optional; at minimum no
   untyped public signatures — see `GP-ANN`).
 - `pytest tests/` must be green; add/extend a smoke test for any new

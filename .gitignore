@@ -50,3 +50,23 @@ desktop.ini
 # ---- Local config (machine-specific) ----
 configs/local/
 *.local.yaml
+
+# >>> research-code-skill:auto-gitignore >>>
+# Auto-managed by research-code-skill sync_gitignore.py
+# Edit rules outside this block to add project-specific ignores.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.env.*
+!.env.example
+*.log
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+# <<< research-code-skill:auto-gitignore <<<

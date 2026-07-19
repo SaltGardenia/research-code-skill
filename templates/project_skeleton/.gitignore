@@ -4,3 +4,33 @@ __pycache__/
 data/
 logs/
 .ipynb_checkpoints/
+
+# >>> research-code-skill:auto-gitignore >>>
+# Auto-managed by research-code-skill sync_gitignore.py
+# Edit rules outside this block to add project-specific ignores.
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.env.*
+!.env.example
+*.log
+data/
+logs/
+outputs/
+wandb/
+checkpoints/
+notebooks/
+runs/
+mlruns/
+lightning_logs/
+.dvc/cache/
+.cache/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+# <<< research-code-skill:auto-gitignore <<<

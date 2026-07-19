@@ -11,6 +11,11 @@
 > post-hoc review.
 >
 > [中文文档 →](./README.zh.md)
+>
+> **Developer note:** every Markdown file in this skill has a Chinese companion
+> (`.zh.md`) for human readers — e.g. `SKILL.zh.md`, `references/*.zh.md`,
+> `examples/*.zh.md`. Agents load the **English** originals; the `.zh.md` files
+> are documentation only.
 
 ## What it does
 
@@ -117,6 +122,33 @@ Ask the Agent to work on your research code (build, add, refactor, name,
 organize). It loads this skill automatically and applies the standard as it
 works — including running the quality checks for you.
 
+## What's in the box (tooling)
+
+The skill ships with scripts that keep the repo clean and the standard enforced.
+Run them yourself if you want the same result the Agent produces.
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/audit_style.py <path>` | Conformance probe (subset of `LHT-/HY-/PL-/GP-*`): emits the fixed findings table. |
+| `scripts/sync_gitignore.py [path]` | Auto-maintains `.gitignore` from the current directory layout. Derives ignore entries inside a marked auto-managed block; hand-written rules are preserved. Use `--check` in CI. |
+| `scripts/run_gate.sh` / `scripts/run_gate.ps1` | Runs the mandatory quality gate (`black`/`isort`/`ruff`/`mypy`/`pytest`) with all tool caches redirected into `.cache/`. |
+
+### Caches are aggregated, not scattered
+
+Tool caches and run artifacts that have **no direct relation to the project
+code** are swept into a single `.cache/` folder at the repo root
+(`.mypy_cache/`, `.pytest_cache/`, `.ruff_cache/`, `.coverage`, `htmlcov/`).
+Hydra run outputs (`logs/`, `outputs/`, `wandb/`) stay at the root as real
+experiment artifacts. Everything under `.cache/` is already covered by
+`.gitignore` and never committed — see `.cache/README.md`.
+
+### Auto-maintained .gitignore
+
+After scaffolding (Scenario A) or tidying (Scenario B), the Agent runs
+`python scripts/sync_gitignore.py .` so the ignore list always tracks the
+current layout — new product directories (`logs/`, `wandb/`, `checkpoints/`, …)
+are ignored automatically without hand-editing.
+
 ## Installation
 
 This skill is a single installable unit. Keep a stable copy of the repo, then
@@ -178,4 +210,12 @@ the checker locally, install the project's Python tools:
 
 ```bash
 python -m pip install -r requirements.txt
+```
+
+Then run the conformance probe and the auto-`.gitignore` sync:
+
+```bash
+python scripts/audit_style.py .            # conformance findings table
+python scripts/sync_gitignore.py .         # keep .gitignore in sync with layout
+bash scripts/run_gate.sh                   # full quality gate, caches -> .cache/
 ```
