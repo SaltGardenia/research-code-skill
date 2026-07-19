@@ -283,133 +283,111 @@
     </div>
   </section>
 
-  <!-- SYSTEMS / FOCUS -->
-  <section id="systems">
-    <div class="sec-head"><span class="tag">§01 · core</span><h2 data-en>Two things it holds, always.</h2><h2 data-zh hidden>它强制执行的两项规范。</h2></div>
-    <div class="grid">
-      <div class="cell"><span class="no">01</span><div class="fam" data-en>PROJECT</div><div class="fam" data-zh hidden>项目层面</div><h3 data-en>A steady framework, kept consistent</h3><h3 data-zh hidden>搭一套框架，并始终保持它</h3><p data-en>The Agent builds one clear, predictable structure for the project and <b>keeps it that way</b> as the code grows — so the shape stays stable and consistent.</p><p data-zh hidden>Agent 为项目搭起一套清晰、可预期的结构，并在代码增长时<b>始终保持它</b>——于是结构不乱、始终一致。</p></div>
-      <div class="cell"><span class="no">02</span><div class="fam" data-en>CODE</div><div class="fam" data-zh hidden>代码层面</div><h3 data-en>Healthy code inside the framework</h3><h3 data-zh hidden>结构内部的健康代码</h3><p data-en>Comments that explain the thinking, sensible API design, and thorough modularization — so the code is easy to read, reuse, and build on.</p><p data-zh hidden>注释讲清思路、API 设计合理、模块化完善——于是代码易读、易复用、易扩展。</p></div>
-    </div>
-    <p data-en style="margin:34px 0 0;color:var(--muted);font-size:14px;max-width:64ch">The two cores are reinforced by established practices, listed below:</p>
-    <p data-zh hidden style="margin:34px 0 0;color:var(--muted);font-size:14px;max-width:64ch">两项核心由下列成熟实践予以支撑：</p>
-    <div class="grid" style="margin-top:18px">
-      <div class="cell"><span class="no">·</span><div class="fam" data-en>REPRODUCIBLE</div><div class="fam" data-zh hidden>可复现</div><h3 data-en>Experiments stay reproducible</h3><h3 data-zh hidden>实验可复现</h3><p data-en>Settings are recorded and the data is identified and version-locked, so a result can be brought back later.</p><p data-zh hidden>设置被记录、数据被标识并锁定版本，于是结果日后能取回。</p></div>
-      <div class="cell"><span class="no">·</span><div class="fam" data-en>PLUGGABLE</div><div class="fam" data-zh hidden>可插拔</div><h3 data-en>New pieces slot in cleanly</h3><h3 data-zh hidden>新部件干净插入</h3><p data-en>Adding a model or option is a small, self-contained addition rather than another special case.</p><p data-zh hidden>加一个模型或选项是一处小而独立的新增，而非又一份特例。</p></div>
-      <div class="cell"><span class="no">·</span><div class="fam" data-en>GATED</div><div class="fam" data-zh hidden>有闸门</div><h3 data-en>Consistency is automatic</h3><h3 data-zh hidden>一致性自动保证</h3><p data-en>Basic formatting and checks run before code is accepted, so uniformity is guaranteed.</p><p data-zh hidden>基础的格式与检查会在代码被接受前自动运行，统一是被保证的。</p></div>
-      <div class="cell"><span class="no">·</span><div class="fam" data-en>SELF-DESCRIBING</div><div class="fam" data-zh hidden>自描述</div><h3 data-en>Comments record the thinking</h3><h3 data-zh hidden>注释记录思路</h3><p data-en>Comments capture the research intent, the reasoning, the design decisions, and the experimental constraints.</p><p data-zh hidden>注释捕捉研究意图、推理、设计决策与实验约束。</p></div>
+  <!-- CAPABILITIES (mirrors README) -->
+  <section id="caps">
+    <div class="sec-head"><span class="tag">§01 · 能力</span><h2 data-en>What it does.</h2><h2 data-zh hidden>能力列表。</h2></div>
+    <ul style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:0 32px">
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🏗️</span><span data-en>Project level: establish a clear, predictable structure and keep it that way.</span><span class="mono" data-zh hidden>🏗️</span><span data-zh hidden>项目层面，建立一套清晰、可预期的结构并长期保持。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🧩</span><span data-en>Models decoupled from systems, self-contained, fixed method order.</span><span class="mono" data-zh hidden>🧩</span><span data-zh hidden>模型与系统分离，模型自包含，遵循固定方法顺序。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>⚙️</span><span data-en>All experiment params in config files; code only reads config, no hardcoding.</span><span class="mono" data-zh hidden>⚙️</span><span data-zh hidden>实验参数一律走配置文件，代码只从配置读取，杜绝硬编码。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🔁</span><span data-en>Reproducible: config, data version, code tag bound together, results regenerate.</span><span class="mono" data-zh hidden>🔁</span><span data-zh hidden>实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🚦</span><span data-en>Mandatory gates (black / isort / ruff / mypy / pytest) pass before accept.</span><span class="mono" data-zh hidden>🚦</span><span data-zh hidden>强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>💬</span><span data-en>Code level: comments explain the thinking, sensible APIs, clean modularization.</span><span class="mono" data-zh hidden>💬</span><span data-zh hidden>代码层面，注释讲清思路、API 设计合理、模块化完善。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🏛️</span><span data-en>Named architectures &amp; pluggability: timm tiers, OpenMMLab, no <code>if model=="..."</code>.</span><span class="mono" data-zh hidden>🏛️</span><span data-zh hidden>命名架构加可插拔：timm 分层、OpenMMLab 注册即用，拒绝 <code>if model == "..."</code> 分支。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>📦</span><span data-en>Ships as a package; CI runs style+type checks; small reviews, docs don't drift.</span><span class="mono" data-zh hidden>📦</span><span data-zh hidden>以可安装包交付，CI 跑风格与类型检查，小步评审、接口文档不漂移。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🧠</span><span data-en>Behavior discipline: think first, keep simple, surgical edits, goal-driven.</span><span class="mono" data-zh hidden>🧠</span><span data-zh hidden>行为纪律：先想后写、保持简单、外科手术式改动、目标驱动执行。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🔧</span><span data-en>Automaintained <code>.gitignore</code>: syncs with layout, keeps hand-written rules.</span><span class="mono" data-zh hidden>🔧</span><span data-zh hidden>自动维护的 <code>.gitignore</code>：随目录结构变化同步忽略规则，不破坏手写规则。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>📂</span><span data-en>Run artifacts funnel into <code>.cache/</code>; nothing litters the repo root.</span><span class="mono" data-zh hidden>📂</span><span data-zh hidden>运行产物收口到 <code>.cache/</code>，仓库根不散落缓存文件。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>🤝</span><span data-en>Key principle: never deletes/rewrites your code — only moves or renames it.</span><span class="mono" data-zh hidden>🤝</span><span data-zh hidden>关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。</span></li>
+      <li style="display:flex;gap:12px;align-items:baseline;padding:12px 0;border-top:1px solid var(--rule)"><span class="mono" data-en>📏</span><span data-en>Every rule is checkable, applied live as work proceeds, not just cited.</span><span class="mono" data-zh hidden>📏</span><span data-zh hidden>每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。</span></li>
+    </ul>
+  </section>
+
+  <!-- SCENARIOS (mirrors README) -->
+  <section id="scenarios">
+    <div class="sec-head"><span class="tag">§02 · 场景</span><h2 data-en>Two scenario examples.</h2><h2 data-zh hidden>两个场景示例。</h2></div>
+    <div class="scn">
+      <div class="card">
+        <div class="lbl" data-en>A · build from zero</div>
+        <div class="lbl" data-zh hidden>A · 从零搭建</div>
+        <div class="say" data-en>“Create a new research project here and add a model trained on CIFAR.”</div>
+        <div class="say" data-zh hidden>“在这里新建一个科研项目，并添加一个在 CIFAR 上训练的模型。”</div>
+        <p data-en style="margin:12px 0 0;color:var(--muted);font-size:14px">The agent scaffolds the structure, then writes <code>src/</code>, <code>configs/</code>, and Hydra <code>_target_</code> per the standard.</p>
+        <p data-zh hidden style="margin:12px 0 0;color:var(--muted);font-size:14px">Agent 从骨架建结构，再按规范写 <code>src/</code>、<code>configs/</code>、Hydra <code>_target_</code>。</p>
+      </div>
+      <div class="card">
+        <div class="lbl" data-en>B · tidy an existing repo</div>
+        <div class="lbl" data-zh hidden>B · 整理已有仓库</div>
+        <div class="say" data-en>“Tidy this repo: move code into the right dirs, turn training params into config, unify naming.”</div>
+        <div class="say" data-zh hidden>“整理这个仓库：代码归位，训练参数改配置，命名统一。”</div>
+        <p data-en style="margin:12px 0 0;color:var(--muted);font-size:14px">The agent audits drift, then refactors/rename into compliance and re-runs the gates.</p>
+        <p data-zh hidden style="margin:12px 0 0;color:var(--muted);font-size:14px">Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。</p>
+      </div>
     </div>
   </section>
-  <section id="capability">
-    <div class="sec-head"><span class="tag">§02 · the two cores</span><h2 data-en>What the two cores actually mean.</h2><h2 data-zh hidden>两点核心到底意味着什么。</h2></div>
 
-    <h3 data-en style="margin:0 0 14px;font-size:18px;font-weight:600">1 · A steady framework, kept consistent</h3>
-    <h3 data-zh hidden style="margin:0 0 14px;font-size:18px;font-weight:600">1 · 搭一套框架，并始终保持它</h3>
-    <p data-en style="margin:0 0 18px;color:var(--lede);max-width:64ch">The Agent builds one clear, predictable structure and refuses to let it drift as work piles up — so every file lives where you expect, and a messy repo becomes orderly without being rewritten.</p>
-    <p data-zh hidden style="margin:0 0 18px;color:var(--lede);max-width:64ch">Agent 搭起一套清晰、可预期的结构，并在工作堆积时绝不任其走样——于是每个文件都在你预期的位置，杂乱的仓库无需重写就能变得井然。</p>
-
-    <h3 data-en style="margin:0 0 14px;font-size:18px;font-weight:600">2 · Healthy code inside the framework</h3>
-    <h3 data-zh hidden style="margin:0 0 14px;font-size:18px;font-weight:600">2 · 结构内部的健康代码</h3>
-    <p data-en style="margin:0 0 24px;color:var(--lede);max-width:64ch">Within that structure the code stays easy to live with: comments explain the <b>why</b>, interfaces are designed to be used, and pieces are modular enough to reuse instead of copy. That is the code-level standard.</p>
-    <p data-zh hidden style="margin:0 0 24px;color:var(--lede);max-width:64ch">在这套结构内部，代码保持好相处：注释解释<b>为什么</b>，接口设计得便于使用，部件模块化到可以复用而非复制。这就是代码层面的规范。</p>
-
-    <h3 data-en style="margin:0 0 14px;font-size:18px;font-weight:600">Comparison with an unorganized repo</h3>
-    <h3 data-zh hidden style="margin:0 0 14px;font-size:18px;font-weight:600">它相较未整理仓库有何优势</h3>
-    <p data-en style="margin:0 0 24px;color:var(--lede);max-width:64ch">A research repo that grows on its own collects the same recurring problems. The skill's steady structure removes them one by one:</p>
-    <p data-zh hidden style="margin:0 0 24px;color:var(--lede);max-width:64ch">一个自然生长、未经整理的科研仓库往往会积累同样的老问题。Skill 稳定的结构把它们逐一消除：</p>
+  <!-- REFERENCES (mirrors README) -->
+  <section id="refs">
+    <div class="sec-head"><span class="tag">§03 · 参考</span><h2 data-en>Reference projects.</h2><h2 data-zh hidden>参考项目。</h2></div>
     <table class="cmp">
       <thead>
         <tr>
-          <th data-en>An un-tidied repo</th><th data-zh hidden>未整理的仓库</th>
-          <th class="good" data-en>A repo shaped by this skill</th><th class="good" data-zh hidden>经本 Skill 加工的仓库</th>
-          <th data-en>Why it's better</th><th data-zh hidden>为什么更好</th>
+          <th data-en>Concern</th><th data-zh hidden>关注领域</th>
+          <th data-en>Basis</th><th data-zh hidden>依据</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="was" data-en data-h="Un-tidied">Experiment settings scattered around and written directly into the code</td><td class="was" data-zh hidden data-h="未整理">实验设置到处散落，还被直接写进代码里</td>
-          <td class="now" data-en data-h="With the skill">All settings gathered in one organized place; running a variation just means changing settings</td><td class="now" data-zh hidden data-h="经加工">所有设置集中在一个有组织的地方；跑一个变体只需改设置</td>
-          <td class="why" data-en data-h="Why">Trying alternatives and reproducing runs becomes effortless; a run is fully described by its settings</td><td class="why" data-zh hidden data-h="为什么">尝试不同做法与重现运行都变得轻松；一次运行由它的设置完整描述</td>
+          <td class="was" data-en data-h="Concern">Project structure &amp; style</td><td class="was" data-zh hidden data-h="关注领域">项目结构与写法</td>
+          <td class="now" data-en data-h="Basis"><a href="https://github.com/ashleve/lightning-hydra-template">Lightning-Hydra-Template</a>, <a href="https://hydra.cc/">Hydra</a>, <a href="https://google.github.io/styleguide/pyguide.html">Google Python Style</a></td><td class="now" data-zh hidden data-h="依据">[Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)、[Hydra](https://hydra.cc/)、[Google Python Style](https://google.github.io/styleguide/pyguide.html)</td>
         </tr>
         <tr>
-          <td class="was" data-en data-h="Un-tidied">Near-duplicate copies of files pile up as work evolves</td><td class="was" data-zh hidden data-h="未整理">随着工作推进，近乎重复的文件副本越堆越多</td>
-          <td class="now" data-en data-h="With the skill">One clear home for reusable pieces, kept in named, layered parts</td><td class="now" data-zh hidden data-h="经加工">可复用的部件只有一个清晰归处，按命名分层存放</td>
-          <td class="why" data-en data-h="Why">Things are reused instead of copied, so shared logic is written once</td><td class="why" data-zh hidden data-h="为什么">东西被复用而非复制，共享逻辑只写一次</td>
+          <td class="was" data-en data-h="Concern">Model &amp; component design</td><td class="was" data-zh hidden data-h="关注领域">模型与组件设计</td>
+          <td class="now" data-en data-h="Basis"><a href="https://lightning.ai/docs/pytorch/stable/starter/style_guide.html">PyTorch Lightning Style</a>, <a href="https://github.com/huggingface/pytorch-image-models">timm</a>, <a href="https://github.com/open-mmlab">OpenMMLab</a></td><td class="now" data-zh hidden data-h="依据">[PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html)、[timm](https://github.com/huggingface/pytorch-image-models)、[OpenMMLab](https://github.com/open-mmlab)</td>
         </tr>
         <tr>
-          <td class="was" data-en data-h="Un-tidied">A growing list of special-case branches to pick behavior</td><td class="was" data-zh hidden data-h="未整理">用一长串特例分支来选择行为</td>
-          <td class="now" data-en data-h="With the skill">New options plug in cleanly, chosen through settings</td><td class="now" data-zh hidden data-h="经加工">新选项干净地插入，通过设置来选择</td>
-          <td class="why" data-en data-h="Why">Adding an option touches one place, not a fragile central list</td><td class="why" data-zh hidden data-h="为什么">新增一个选项只动一处，而非一份脆弱的中央清单</td>
+          <td class="was" data-en data-h="Concern">Reproducible experiments</td><td class="was" data-zh hidden data-h="关注领域">可复现实验</td>
+          <td class="now" data-en data-h="Basis"><a href="https://hydra.cc/">Hydra</a>, <a href="https://www.go-fair.org/fair-principles/">FAIR</a>, <a href="https://semver.org/">SemVer</a>, <a href="https://nvie.com/posts/a-successful-git-branching-model/">Git Flow</a>, <a href="https://github.com/facebookresearch">Meta Research</a></td><td class="now" data-zh hidden data-h="依据">[Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch)</td>
         </tr>
         <tr>
-          <td class="was" data-en data-h="Un-tidied">Data dropped in a folder with no version and no notes</td><td class="was" data-zh hidden data-h="未整理">数据随手丢进某个文件夹，没有版本也没有说明</td>
-          <td class="now" data-en data-h="With the skill">Data that is identified, described, version-locked, and easy to load</td><td class="now" data-zh hidden data-h="经加工">被清楚标识、有描述、锁定版本、易于加载的数据</td>
-          <td class="why" data-en data-h="Why">Every run records exactly which data it used</td><td class="why" data-zh hidden data-h="为什么">每次运行都记录了它到底用了哪份数据</td>
+          <td class="was" data-en data-h="Concern">Engineering habits &amp; interfaces</td><td class="was" data-zh hidden data-h="关注领域">工程习惯与接口</td>
+          <td class="now" data-en data-h="Basis"><a href="https://google.github.io/eng-practices/">Software Engineering at Google</a>, <a href="https://learn.scientific-python.org/development/">Scientific Python</a>, research-code commenting standard</td><td class="now" data-zh hidden data-h="依据">[Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范</td>
         </tr>
         <tr>
-          <td class="was" data-en data-h="Un-tidied">"Which version?" answered by a chat message</td><td class="was" data-zh hidden data-h="未整理">"哪个版本？"靠一条聊天消息回答</td>
-          <td class="now" data-en data-h="With the skill">Clear release versions, each tied to a retrievable snapshot of the code</td><td class="now" data-zh hidden data-h="经加工">清晰的发布版本，每一个都对应一份可取回的代码快照</td>
-          <td class="why" data-en data-h="Why">Results map back to exact code and settings; changes are reviewed before they land</td><td class="why" data-zh hidden data-h="为什么">结果能对应回确切的代码与设置；改动在合入前先经过评审</td>
-        </tr>
-        <tr>
-          <td class="was" data-en data-h="Un-tidied">Descriptions rot as the code changes underneath them</td><td class="was" data-zh hidden data-h="未整理">说明随着代码变化而逐渐腐烂</td>
-          <td class="now" data-en data-h="With the skill">Descriptions kept in step with the code, updated in the same change</td><td class="now" data-zh hidden data-h="经加工">说明与代码保持同步，在同一次改动里更新</td>
-          <td class="why" data-en data-h="Why">What you read always matches what the code does</td><td class="why" data-zh hidden data-h="为什么">你读到的内容永远和代码的行为一致</td>
-        </tr>
-        <tr>
-          <td class="was" data-en data-h="Un-tidied">Checks run occasionally, by hand, if at all</td><td class="was" data-zh hidden data-h="未整理">检查偶尔手动跑一下，甚至根本不跑</td>
-          <td class="now" data-en data-h="With the skill">Checks run automatically as a required step</td><td class="now" data-zh hidden data-h="经加工">检查作为必经步骤自动运行</td>
-          <td class="why" data-en data-h="Why">Consistency is enforced, not left to chance</td><td class="why" data-zh hidden data-h="为什么">一致性由流程强制保障，而非偶然</td>
+          <td class="was" data-en data-h="Concern">LLM coding discipline</td><td class="was" data-zh hidden data-h="关注领域">LLM 编码纪律</td>
+          <td class="now" data-en data-h="Basis"><a href="https://github.com/multica-ai/andrej-karpathy-skills">Karpathy Skills</a></td><td class="now" data-zh hidden data-h="依据">[Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)</td>
         </tr>
       </tbody>
     </table>
   </section>
 
-  <!-- SCENARIOS -->
-  <section id="scenarios">
-    <div class="sec-head"><span class="tag">§03 · modes</span><h2 data-en>Two ways to put it to work.</h2><h2 data-zh hidden>两种上手方式。</h2></div>
-    <div class="scn">
-      <div class="card">
-        <div class="lbl" data-en>MODE A — build from zero</div>
-        <div class="lbl" data-zh hidden>模式 A — 从零搭建</div>
-        <h3 data-en>Scaffold a compliant project on the first commit.</h3>
-        <h3 data-zh hidden>在第一次提交时就搭出合规项目。</h3>
-        <p style="margin:0;color:var(--muted);font-size:14px" data-en>Generates the full skeleton and writes every new file to the standard.</p>
-        <p style="margin:0;color:var(--muted);font-size:14px" data-zh hidden>生成完整骨架，并把每个新文件写到规范里。</p>
-        <div class="say" data-en>“Start a new research project here and add a model that trains on CIFAR.”</div>
-        <div class="say" data-zh hidden>“在这里新建一个科研项目，并添加一个在 CIFAR 上训练的模型。”</div>
-      </div>
-      <div class="card">
-        <div class="lbl" data-en>MODE B — tidy an existing repo</div>
-        <div class="lbl" data-zh hidden>模式 B — 整理已有仓库</div>
-        <h3 data-en>Reshape a messy repo without breaking it.</h3>
-        <h3 data-zh hidden>整理杂乱仓库，且不破坏它。</h3>
-        <p style="margin:0;color:var(--muted);font-size:14px" data-en>Reorganizes by moving &amp; renaming — never arbitrary deletion. Code with no target folder stays in root.</p>
-        <p style="margin:0;color:var(--muted);font-size:14px" data-zh hidden>通过移动与重命名来整理——绝不随意删除。无归属文件夹的代码留在根目录。</p>
-        <div class="say" data-en>“Organize this repo: move code into folders, turn training flags into configs, keep naming consistent.”</div>
-        <div class="say" data-zh hidden>“整理这个仓库：把代码归入文件夹，把训练参数改成配置，保持命名统一。”</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INSTALL -->
+  <!-- QUICK START (mirrors README) -->
   <section id="install">
-    <div class="sec-head"><span class="tag">§04 · install</span><h2 data-en>Point your agent at the spec.</h2><h2 data-zh hidden>让智能体指向这份规范。</h2></div>
+    <div class="sec-head"><span class="tag">§04 · 快速开始</span><h2 data-en>Quick start.</h2><h2 data-zh hidden>快速开始。</h2></div>
+    <p data-en style="color:var(--lede);max-width:64ch">Clone to a stable path (don't develop inside this copy); point the agent at <code>SKILL.md</code>:</p>
+    <p data-zh hidden style="color:var(--lede);max-width:64ch">克隆到稳定路径（不要在此副本内开发），让 Agent 指向 <code>SKILL.md</code>：</p>
     <div class="terminal">
       <div class="tb"><i></i><i></i><i></i><span>~/ai-skills — bash</span></div>
-<pre><span class="p" data-en># keep a stable copy, then point your agent at the skill's main file</span><span class="p" data-zh hidden># 保留稳定副本，再让智能体指向 skill 的主文件</span>
-mkdir -p ~/ai-skills
-git clone <span class="c">https://github.com/SaltGardenia/research-code-skill.git</span> \
+<pre><span class="p" data-en># clone the skill to a stable path</span><span class="p" data-zh hidden># 克隆 skill 到稳定路径</span>
+git clone https://github.com/SaltGardenia/research-code-skill.git \
   ~/ai-skills/research-code-skill
 
-<span class="p" data-en># Claude Code — wrap it as a subagent</span><span class="p" data-zh hidden># Claude Code —— 包成 subagent</span>
+<span class="p" data-en># Claude Code — load the main file as a subagent</span><span class="p" data-zh hidden># Claude Code —— 用 subagent 加载主文件</span>
 mkdir -p ~/.claude/agents
-<span class="p" data-en># → the agent reads the skill's main file and follows it</span><span class="p" data-zh hidden># → 智能体读取 skill 的主文件并照此执行</span>
-
-<span class="p" data-en># Codex / Kilo / others — paste the repo link and say:</span><span class="p" data-zh hidden># Codex / Kilo / 其他 —— 贴出仓库链接并说：</span>
-<span class="c" data-en>"follow the skill's main file; keep the full folder."</span><span class="c" data-zh hidden>"遵循 skill 的主文件；保留整个文件夹。"</span></pre>
+cat &gt; ~/.claude/agents/research-code-skill.md &lt;&lt;'EOF'
+---
+name: research-code-skill
+description: 用于以固定结构、统一规范搭建或整理科研（ML/DL）代码库。
+---
+When invoked, first read `~/ai-skills/research-code-skill/SKILL.md` and follow it as the governing workflow.
+Read supporting files from `~/ai-skills/research-code-skill/` only when needed.
+Do not replace this skill with a generic coding response.
+EOF</pre>
     </div>
-    <p class="note" data-en>Keep a stable copy of the skill, then point your agent at its main file. The quality checker runs automatically — you never run it by hand.</p>
-    <p class="note" data-zh hidden>保留一份稳定的 skill 副本，再让你的智能体指向它的主文件。质量检查器自动运行，无需手动执行。</p>
+    <p data-en style="color:var(--muted);font-size:14px;margin-top:16px">Other agents (Kilo, Codex, etc.) keep the full folder: create a subagent / slash command / custom prompt pointing at the main file. Update: <code>cd ~/ai-skills/research-code-skill &amp;&amp; git pull</code>.</p>
+    <p data-zh hidden style="color:var(--muted);font-size:14px;margin-top:16px">其他 Agent（Kilo、Codex 等）同样保留完整文件夹，创建指向主文件的 subagent / slash command / 自定义 prompt。更新：<code>cd ~/ai-skills/research-code-skill &amp;&amp; git pull</code>。</p>
+    <p data-en style="color:var(--muted);font-size:14px">Run the checker locally: first <code>python -m pip install -r requirements.txt</code>, then <code>python scripts/audit_style.py .</code>, <code>python scripts/sync_gitignore.py .</code>, <code>bash scripts/run_gate.sh</code>.</p>
+    <p data-zh hidden style="color:var(--muted);font-size:14px">本地运行检查器：先 <code>python -m pip install -r requirements.txt</code>，再依次运行 <code>python scripts/audit_style.py .</code>、<code>python scripts/sync_gitignore.py .</code>、<code>bash scripts/run_gate.sh</code>。</p>
   </section>
 
   <footer>

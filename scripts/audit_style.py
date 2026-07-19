@@ -64,10 +64,9 @@ def check_python_file(path: str, max_len: int, out: List[Finding]) -> None:
                                f"Line {len(line)}>{max_len} chars; wrap it."))
 
         # GP-SEMI: semicolons (not in strings/comments)
-        if re.search(r";\s*$", line) or re.search(r"[^;]*;[^;]*;", line):
-            if not line.strip().startswith("#"):
-                out.append(Finding("PYSTYLE", "MINOR", loc, "GP-SEMI",
-                                   "Avoid semicolons; one statement per line."))
+        if _has_semicolon(line):
+            out.append(Finding("PYSTYLE", "MINOR", loc, "GP-SEMI",
+                               "Avoid semicolons; one statement per line."))
 
         # GP-EXC: bare except
         if re.search(r"^\s*except\s*:", line):
@@ -123,7 +122,8 @@ def check_repo(root: str, max_len: int, out: List[Finding]) -> None:
     py_files: List[str] = []
 
     for dirpath, _dirs, files in os.walk(root):
-        if ".git" in dirpath or "/logs/" in dirpath or "/data/" in dirpath:
+        norm = dirpath.replace(os.sep, "/")
+        if ".git" in norm or "/logs/" in norm or "/data/" in norm:
             continue
         for fn in files:
             full = os.path.join(dirpath, fn)
