@@ -41,6 +41,7 @@ Layout matches Lightning-Hydra-Template exactly:
 - setup.py
 - environment.yaml
 - Makefile
+- README.md
 - .gitignore
 - .env.example
 - .project-root

@@ -40,6 +40,7 @@
 - setup.py
 - environment.yaml
 - Makefile
+- README.md
 - .gitignore
 - .env.example
 - .project-root
