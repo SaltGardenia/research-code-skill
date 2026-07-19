@@ -9,19 +9,19 @@
 
 ## ✨ Capabilities
 
-- Project level: establish a clear, predictable structure and keep it that way.
-- Models are decoupled from systems, self-contained, following a fixed method order.
-- All experiment parameters live in config files; code only reads from config, no hardcoding.
-- Reproducible experiments: config, data version, and code tag bound together, so results regenerate.
-- Mandatory quality gates (black / isort / ruff / mypy / pytest) must pass before a change is accepted.
-- Code level: comments explain the thinking, sensible API design, clean modularization.
-- Named architectures & pluggability: timm tiers, OpenMMLab register-then-build, no `if model == "..."` branching.
-- Ships as an installable package; CI runs style + type checks; small reviewable changes, interface docs never drift.
-- Behavioral discipline: think before coding, simplicity first, surgical changes, goal-driven execution.
-- Automaintained `.gitignore`: ignore rules sync with the layout, without clobbering hand-written rules.
-- Run artifacts funnel into `.cache/`; no cache files litter the repo root.
-- Key principle: the agent never deletes or rewrites your code on a whim — it only moves or renames to preserve behavior.
-- Every rule is encoded as a checkable rule, applied and verified live as work proceeds — not just referenced from docs.
+- 🏗️ Project level: establish a clear, predictable structure and keep it that way.
+- 🧩 Models are decoupled from systems, self-contained, following a fixed method order.
+- ⚙️ All experiment parameters live in config files; code only reads from config, no hardcoding.
+- 🔁 Reproducible experiments: config, data version, and code tag bound together, so results regenerate.
+- 🚦 Mandatory quality gates (black / isort / ruff / mypy / pytest) must pass before a change is accepted.
+- 💬 Code level: comments explain the thinking, sensible API design, clean modularization.
+- 🏛️ Named architectures & pluggability: timm tiers, OpenMMLab register-then-build, no `if model == "..."` branching.
+- 📦 Ships as an installable package; CI runs style + type checks; small reviewable changes, interface docs never drift.
+- 🧠 Behavioral discipline: think before coding, simplicity first, surgical changes, goal-driven execution.
+- 🔧 Automaintained `.gitignore`: ignore rules sync with the layout, without clobbering hand-written rules.
+- 📂 Run artifacts funnel into `.cache/`; no cache files litter the repo root.
+- 🤝 Key principle: the agent never deletes or rewrites your code on a whim — it only moves or renames to preserve behavior.
+- 📏 Every rule is encoded as a checkable rule, applied and verified live as work proceeds — not just referenced from docs.
 
 ## 🎯 Two scenario examples
 

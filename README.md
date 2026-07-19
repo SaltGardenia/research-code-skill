@@ -9,39 +9,41 @@
 
 ## ✨ 能力列表
 
-- 项目层面，建立一套清晰、可预期的结构并长期保持。
-- 模型与系统分离，模型自包含，遵循固定方法顺序。
-- 实验参数一律走配置文件，代码只从配置读取，杜绝硬编码。
-- 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
-- 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
-- 代码层面，注释讲清思路、API 设计合理、模块化完善。
-- 命名架构加可插拔：timm 分层、OpenMMLab 注册即用，拒绝 `if model == "..."` 分支。
-- 以可安装包交付，CI 跑风格与类型检查，小步评审、接口文档不漂移。
-- 行为纪律：先想后写、保持简单、外科手术式改动、目标驱动执行。
-- 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
-- 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
-- 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
-- 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
+- 🏗️ 项目层面，建立一套清晰、可预期的结构并长期保持。
+- 🧩 模型与系统分离，模型自包含，遵循固定方法顺序。
+- ⚙️ 实验参数一律走配置文件，代码只从配置读取，杜绝硬编码。
+- 🔁 实验可复现：配置、数据版本、代码 tag 三者绑定，结果可重生。
+- 🚦 强制质量门（black / isort / ruff / mypy / pytest），变更接受前必须通过。
+- 💬 代码层面，注释讲清思路、API 设计合理、模块化完善。
+- 🏛️ 命名架构加可插拔：timm 分层、OpenMMLab 注册即用，拒绝 `if model == "..."` 分支。
+- 📦 以可安装包交付，CI 跑风格与类型检查，小步评审、接口文档不漂移。
+- 🧠 行为纪律：先想后写、保持简单、外科手术式改动、目标驱动执行。
+- 🔧 自动维护的 `.gitignore`：随目录结构变化同步忽略规则，不破坏手写规则。
+- 📂 运行产物收口到 `.cache/`，仓库根不散落缓存文件。
+- 🤝 关键原则：Agent 不会随意删除或重写你的代码，只移动、重命名以保持行为不变。
+- 📏 每条规范编码为可检查的规则，随工作实时应用与校验，而非仅引用文档。
 
 ## 🎯 两个场景示例
 
 **A. 从零搭建**
+
 > “在这里新建一个科研项目，并添加一个在 CIFAR 上训练的模型。”
 > Agent 从骨架建结构，再按规范写 `src/`、`configs/`、Hydra `_target_`。
 
 **B. 整理已有仓库**
+
 > “整理这个仓库：代码归位，训练参数改配置，命名统一。”
 > Agent 先审计偏离，再重构重命名至合规，重跑校验门确认。
 
 ## 📚 参考项目
 
-| 关注领域 | 依据 |
-|------|------|
-| 项目结构与写法 | [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)、[Hydra](https://hydra.cc/)、[Google Python Style](https://google.github.io/styleguide/pyguide.html) |
-| 模型与组件设计 | [PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html)、[timm](https://github.com/huggingface/pytorch-image-models)、[OpenMMLab](https://github.com/open-mmlab) |
-| 可复现实验 | [Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch) |
-| 工程习惯与接口 | [Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范 |
-| LLM 编码纪律 | [Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)：编码前先思考、简洁优先、精准改动、目标驱动执行 |
+| 关注领域     | 依据                                                                                                                                                                                                                                  |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 项目结构与写法  | [Lightning-Hydra-Template](https://github.com/ashleve/lightning-hydra-template)、[Hydra](https://hydra.cc/)、[Google Python Style](https://google.github.io/styleguide/pyguide.html)                                                  |
+| 模型与组件设计  | [PyTorch Lightning Style](https://lightning.ai/docs/pytorch/stable/starter/style_guide.html)、[timm](https://github.com/huggingface/pytorch-image-models)、[OpenMMLab](https://github.com/open-mmlab)                                 |
+| 可复现实验    | [Hydra](https://hydra.cc/)、[FAIR](https://www.go-fair.org/fair-principles/)、[SemVer](https://semver.org/)、[Git Flow](https://nvie.com/posts/a-successful-git-branching-model/)、[Meta Research](https://github.com/facebookresearch) |
+| 工程习惯与接口  | [Software Engineering at Google](https://google.github.io/eng-practices/)、[Scientific Python](https://learn.scientific-python.org/development/)、科研代码注释规范                                                                            |
+| LLM 编码纪律 | [Karpathy Skills](https://github.com/multica-ai/andrej-karpathy-skills)                                                                                                                                                             |
 
 ## 🚀 快速开始
 
