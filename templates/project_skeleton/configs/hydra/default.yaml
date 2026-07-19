@@ -1,0 +1,6 @@
+# Hydra runtime output dir. Composed into every run.
+defaults:
+  - _self_
+
+run:
+  dir: ${paths.log_dir}/${task_name}/runs/${now:%Y-%m-%d}_${now:%H-%M-%S}

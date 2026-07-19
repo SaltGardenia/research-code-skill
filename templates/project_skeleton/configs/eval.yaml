@@ -1,8 +1,15 @@
 defaults:
   - _self_
-  - model: null
   - data: null
+  - model: null
+  - callbacks: null
   - logger: null
+  - trainer: default
   - paths: default
+  - extras: default
+  - hydra: default
+  - optional local: default
+  - debug: null
 
-ckpt_path: ???
+seed: 1234
+ckpt_path: null

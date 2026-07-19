@@ -1,0 +1,6 @@
+# Extra utilities run before/after the task (e.g. rich traceback, loggers).
+defaults:
+  - _self_
+
+# enable/disable optional extras
+print_config: true

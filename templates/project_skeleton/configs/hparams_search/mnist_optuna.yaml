@@ -1,0 +1,8 @@
+# Hyperparameter search configs (Optuna / Ax / Nevergrad).
+# Run: python src/train.py -m hparams_search=mnist_optuna
+defaults:
+  - _self_
+
+# _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+# n_trials: 20
+# sample: { _target_: optuna.samplers.TPESampler }

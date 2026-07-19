@@ -1,0 +1,4 @@
+# Version-control best hyperparameters by overriding the main config.
+# Run: python src/train.py experiment=example
+defaults:
+  - override /trainer: default

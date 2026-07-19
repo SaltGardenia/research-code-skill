@@ -32,25 +32,36 @@
 
 ## 项目结构示例
 
-Agent 搭建或整理后产出的标准结构：
+Agent 搭建或整理后产出的标准结构（与 Lightning-Hydra-Template 完全一致）：
 
 ```
 <project>/
-├── configs/                 # Hydra 配置，按关注点分组
-│   ├── data/  model/  trainer/
-│   ├── callbacks/  logger/  experiment/
-│   ├── train.yaml  eval.yaml
+├── .github/workflows/         # CI（pytest + pre-commit）
+├── configs/                   # Hydra 配置，按关注点分组
+│   ├── callbacks/  data/  debug/  experiment/
+│   ├── extras/  hparams_search/  hydra/
+│   ├── local/  logger/  model/  paths/  trainer/
+│   ├── eval.yaml  train.yaml     # 主配置（defaults 列表）
+├── data/                      # 原始 / 处理后的数据（git 忽略）
+├── logs/                      # hydra + logger 输出，带时间戳（git 忽略）
+├── notebooks/                 # 编号 + 缩写 + 简述（如 1.0-jqp-explore.ipynb）
+├── scripts/                   # shell 脚本（Makefile 目标调用）
 ├── src/
-│   ├── data/                # LightningDataModule
-│   ├── models/              # 模型骨干 + LightningModule
-│   │   ├── components/  <project>_module.py
-│   ├── utils/               # 工具与实例化逻辑
-│   ├── train.py  eval.py    # @hydra.main 入口
-├── tests/                   # 冒烟 + 单元测试
-├── data/  logs/  notebooks/  # 数据 / 运行输出 / 笔记（git 忽略）
-├── .env.example  .project-root
-├── .gitignore  .pre-commit-config.yaml
-├── pyproject.toml  requirements.txt
+│   ├── data/                  # LightningDataModule
+│   ├── models/                # 模型骨干 + LightningModule
+│   │   └── components/        # 可复用的模型组件
+│   ├── utils/                 # 工具与实例化逻辑
+│   ├── eval.py  train.py      # @hydra.main 入口
+├── tests/                     # 冒烟 + 单元测试（pytest）
+├── .env.example               # 私有环境变量模板（复制为 .env）
+├── .gitignore
+├── .pre-commit-config.yaml    # 格式化 / lint / 安全 hooks
+├── .project-root              # rootutils 标记项目根
+├── environment.yaml           # conda 环境
+├── Makefile                   # make train/test/format/clean
+├── pyproject.toml             # pytest + coverage + 工具配置
+├── requirements.txt
+├── setup.py                   # 以包形式安装项目
 └── README.md
 ```
 

@@ -1,0 +1,2 @@
+# Machine / user specific overrides. Optional and git-ignored.
+# Add local secrets or paths here; never commit this file.

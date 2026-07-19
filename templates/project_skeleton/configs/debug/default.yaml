@@ -1,0 +1,5 @@
+# Fast dev run / debugging overrides applied via `debug=default`.
+limit_train_batches: 0.01
+limit_val_batches: 0.01
+limit_test_batches: 0.01
+fast_dev_run: false
