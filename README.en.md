@@ -36,8 +36,6 @@
 
 ## 📂 Scaffolded project layout
 
-When building from scratch (Scenario A), the skill generates the target repo using the directory tree below — the Lightning-Hydra-Template structure. Replace `<project>` with your project name; `data/` and `logs/` are git-ignored.
-
 ```text
 <project>/
 ├── .github/workflows/ci.yaml

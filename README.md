@@ -37,8 +37,6 @@
 
 ## 📂 生成的项目结构
 
-该 Skill 在从零搭建（场景 A）时，会按下面的目录树生成目标仓库（即 Lightning-Hydra-Template 结构）。将 `<project>` 替换为你的项目名即可；`data/`、`logs/` 会被 `.gitignore` 忽略。
-
 ```text
 <project>/
 ├── .github/workflows/ci.yaml
